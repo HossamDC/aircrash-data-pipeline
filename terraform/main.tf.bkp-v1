@@ -1,0 +1,230 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+      
+    }
+    
+  }
+}
+
+provider "aws" {
+  
+  region = "us-west-2"
+  
+}
+
+# Create S3 bucket
+# resource "aws_s3_bucket" "data_bucket" {
+#   bucket = var.bucket_name
+#   # provider = aws.us-west-2
+# 
+#   tags = {
+#     Name        = "Spark Data Bucket"
+#     Environment = "Dev"
+#   }
+#   
+# }
+
+# Enable versioning for S3 bucket
+#resource "aws_s3_bucket_versioning" "data_bucket_versioning" {
+#  bucket = aws_s3_bucket.data_bucket.id
+#  
+#  versioning_configuration {
+#    status = "Enabled"
+#  }
+#}
+
+# Create IAM Role for Redshift
+resource "aws_iam_role" "redshift_role" {
+  name = "RedshiftS3AccessRole"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Principal = {
+          Service = "redshift.amazonaws.com"
+        },
+        Action = "sts:AssumeRole"
+      }
+    ]
+  })
+}
+
+# Attach S3 read-only policy to the role
+resource "aws_iam_role_policy_attachment" "redshift_s3_access" {
+  role       = aws_iam_role.redshift_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonElasticMapReduceFullAccess"
+  #policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
+}
+
+  # Create Redshift Subnet Group
+resource "aws_redshift_subnet_group" "demo_subnet_group" {
+  name       = "demo-subnet-group"
+  subnet_ids = ["subnet-0b89383302cc9b2c1", "subnet-01e5b7a12aa5dfa94", "subnet-0c7a53c5ec9e6d3bc", "subnet-06eb68aa5e99d735d"]
+
+  tags = {
+    Name = "Demo Subnet Group"
+  }
+}
+
+# Create Redshift cluster and associate IAM role
+resource "aws_redshift_cluster" "demo_cluster" {
+  cluster_identifier      = "demo-cluster"
+  database_name           = "demo_db"
+  master_username         = "admin"
+  master_password         = "YourStrongPassword123!"
+  node_type               = "dc2.large"
+  cluster_type            = "single-node"
+  skip_final_snapshot     = true
+
+  # Attach the IAM role to the Redshift cluster
+  iam_roles = [aws_iam_role.redshift_role.arn]
+
+  cluster_subnet_group_name = aws_redshift_subnet_group.demo_subnet_group.name
+  
+  # ✅ استبدال var.vpc_security_group_ids بتعريف الـ security group الجديد
+  vpc_security_group_ids = [aws_security_group.redshift_sg.id] 
+
+  tags = {
+    Name        = "Demo Cluster"
+    Environment = "Dev"
+  }
+}
+
+
+
+
+#
+## Create IAM Role for EMR
+#resource "aws_iam_role" "emr_role" {
+#  name = "EMR_DefaultRole"
+#
+#  assume_role_policy = jsonencode({
+#    Version = "2012-10-17",
+#    Statement = [
+#      {
+#        Effect = "Allow",
+#        Principal = {
+#          Service = "elasticmapreduce.amazonaws.com"
+#        },
+#        Action = "sts:AssumeRole"
+#      }
+#    ]
+#  })
+#}
+
+# Attach S3 full access policy to EMR Role
+#resource "aws_iam_role_policy_attachment" "emr_s3_access" {
+#  role       = aws_iam_role.emr_role.name
+#  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+#}
+
+
+# Create IAM Instance Profile for EMR
+resource "aws_iam_instance_profile" "emr_profile" {
+  name = "EMR_EC2_InstanceProfile"
+  role = "EMR_EC2_DefaultRole"
+  
+
+}
+
+
+# Create EMR Cluster for Spark
+resource "aws_emr_cluster" "spark_cluster" {
+  name          = "MyEMRCluster"
+  release_label = "emr-6.10.0"
+  applications  = ["Spark"]
+
+  #service_role     = aws_iam_role.emr_role.arn
+  service_role     = "arn:aws:iam::381492085524:role/EMR_DefaultRole"
+ 
+  
+  log_uri          = "s3://${var.bucket_name}/emr-logs/"
+  termination_protection = false
+  keep_job_flow_alive_when_no_steps = true
+
+  ec2_attributes {
+    key_name                          = var.key_name
+    subnet_id                         = var.subnet_id
+    emr_managed_master_security_group = var.vpc_security_group_ids[0]
+    emr_managed_slave_security_group  = var.vpc_security_group_ids[0]
+    #instance_profile                 = aws_iam_instance_profile.emr_profile.name
+    instance_profile = aws_iam_instance_profile.emr_profile.arn
+
+
+  }
+
+  master_instance_group {
+    instance_type  = "m5.xlarge"
+    instance_count = 1
+  }
+
+  core_instance_group {
+    instance_type  = "m5.xlarge"
+    instance_count = 2
+  }
+
+  tags = {
+    Name        = "Spark Cluster"
+    Environment = "Dev"
+     for-use-with-amazon-emr-managed-policies = "true"
+  }
+}
+
+
+resource "aws_security_group" "redshift_sg" {
+  name        = "redshift-sg"
+  description = "Security group for Redshift"
+  vpc_id      = "vpc-03675f21362ca33bd"
+
+  ingress {
+    from_port   = 5439
+    to_port     = 5439
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "Redshift SG"
+  }
+}
+
+##################################################################
+resource "aws_security_group_rule" "emr_ingress" {
+  type              = "ingress"
+  from_port         = 9443
+  to_port           = 9443
+  protocol          = "tcp"
+  security_group_id = aws_security_group.redshift_sg.id
+  cidr_blocks       = ["0.0.0.0/0"]
+}
+
+######################
+resource "aws_iam_policy" "emr_ec2_access" {
+  name        = "EMR_EC2_Access"
+  description = "Allows EMR to access EC2 subnets"
+  
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "ec2:DescribeSubnets",
+          "ec2:DescribeVpcs",
+          "ec2:DescribeSecurityGroups"
+        ],
+        Resource = "*"
+      }
+    ]
+  })
+}
+
+#resource "aws_iam_role_policy_attachment" "emr_ec2_access" {
+#  policy_arn = aws_iam_policy.emr_ec2_access.arn
+#  role       = aws_iam_role.emr_role.name
+#}
