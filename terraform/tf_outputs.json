@@ -1,0 +1,17 @@
+{
+  "redshift_db": {
+    "sensitive": false,
+    "type": "string",
+    "value": "demo_db"
+  },
+  "redshift_host": {
+    "sensitive": false,
+    "type": "string",
+    "value": "demo-cluster.cnp6ksjha1o5.us-west-2.redshift.amazonaws.com:5439"
+  },
+  "redshift_user": {
+    "sensitive": false,
+    "type": "string",
+    "value": "admin"
+  }
+}

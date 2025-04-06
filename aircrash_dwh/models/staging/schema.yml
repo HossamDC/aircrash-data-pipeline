@@ -1,0 +1,25 @@
+version: 2
+
+sources:
+  - name: spectrum_schema
+    tables:
+      - name: airplane_crashes_parquet
+
+models:
+  - name: stg_airplane_crashes
+    description: "Base model reading from external table in S3"
+    columns:
+      - name: crash_date
+        description: "Crash date"
+      - name: location
+      - name: operator
+      - name: type
+      - name: aircraft_maker
+      - name: aboard
+      - name: fatalities
+      - name: ground
+      - name: survivors
+      - name: is_fatal
+      - name: crash_severity
+      - name: year
+      - name: month
