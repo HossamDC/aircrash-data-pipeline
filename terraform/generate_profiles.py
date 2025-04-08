@@ -1,17 +1,18 @@
 import json
 import os
 
-# اقرأ الـ terraform output
+# اقرأ مخرجات Terraform
 with open("tf_outputs.json") as f:
     tf_outputs = json.load(f)
 
 # استخرج القيم
-host = tf_outputs["redshift_host"]["value"]
+host_with_port = tf_outputs["redshift_host"]["value"]
+host = host_with_port.split(":")[0]  # 🔧 نحذف البورت لو موجود
 dbname = tf_outputs["redshift_db"]["value"]
 user = tf_outputs["redshift_user"]["value"]
-password = "YourStrongPassword123!"  # 🔐 حطها manually أو خزنها بمصدر آمن
+password = "YourStrongPassword123!"  # 🔐 حطها يدويًا أو من source آمن
 
-# بُنية ملف dbt profile
+# بناء الـ profile
 profile = f"""
 aircrash_dwh:
   target: dev
@@ -27,13 +28,13 @@ aircrash_dwh:
       threads: 4
       keepalives_idle: 0
       connect_timeout: 10
-      sslmode: prefer
+      sslmode: require
 """
 
-# أنشئ المجلد إذا مش موجود
+# أنشئ مجلد dbt إذا مش موجود
 os.makedirs(os.path.expanduser("~/.dbt"), exist_ok=True)
 
-# اكتب الملف
+# اكتب الـ profile
 with open(os.path.expanduser("~/.dbt/profiles.yml"), "w") as f:
     f.write(profile)
 

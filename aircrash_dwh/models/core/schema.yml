@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: fact_plane_crashes
+    description: "Crash fact table with all measures and keys"
+  - name: dim_aircraft
+    description: "Unique aircraft types"
+  - name: dim_operator
+    description: "Unique operator-country combos"
+  - name: dim_date
+    description: "Calendar info from crash date"

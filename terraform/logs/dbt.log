@@ -1,0 +1,85 @@
+[0m23:40:46.614262 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fe1228f5f00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fe122749e70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fe1218970a0>]}
+
+
+============================== 23:40:46.616713 | 3348751c-7cc9-4571-8d08-db4770584abf ==============================
+[0m23:40:46.616713 [info ] [MainThread]: Running with dbt=1.10.0-b2
+[0m23:40:46.617424 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'debug': 'False', 'profiles_dir': '/home/anaconda/.dbt', 'log_path': 'logs', 'fail_fast': 'False', 'version_check': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'empty': 'None', 'quiet': 'False', 'no_print': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'invocation_command': 'dbt debug', 'log_format': 'default', 'static_parser': 'True', 'target_path': 'None', 'introspect': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m23:40:46.627105 [info ] [MainThread]: dbt version: 1.10.0-b2
+[0m23:40:46.627657 [info ] [MainThread]: python version: 3.10.12
+[0m23:40:46.628185 [info ] [MainThread]: python path: /home/anaconda/dbt-env/bin/python3
+[0m23:40:46.628751 [info ] [MainThread]: os info: Linux-5.10.102.1-microsoft-standard-WSL2-x86_64-with-glibc2.35
+[0m23:40:46.723615 [debug] [MainThread]: Redshift adapter: Setting redshift_connector to ERROR
+[0m23:40:46.724059 [debug] [MainThread]: Redshift adapter: Setting redshift_connector.core to ERROR
+[0m23:40:46.790828 [info ] [MainThread]: Using profiles dir at /home/anaconda/.dbt
+[0m23:40:46.791575 [info ] [MainThread]: Using profiles.yml file at /home/anaconda/.dbt/profiles.yml
+[0m23:40:46.792186 [info ] [MainThread]: Using dbt_project.yml file at /home/anaconda/aircrash-data-pipeline/terraform/dbt_project.yml
+[0m23:40:46.793100 [info ] [MainThread]: adapter type: redshift
+[0m23:40:46.793580 [info ] [MainThread]: adapter version: 1.9.3
+[0m23:40:46.794149 [info ] [MainThread]: Configuration:
+[0m23:40:46.794680 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m23:40:46.795167 [info ] [MainThread]:   dbt_project.yml file [[31mERROR not found[0m]
+[0m23:40:46.795669 [info ] [MainThread]: Required dependencies:
+[0m23:40:46.796140 [debug] [MainThread]: Executing "git --help"
+[0m23:40:46.799055 [debug] [MainThread]: STDOUT: "b"usage: git [--version] [--help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]\n           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]\n           [--super-prefix=<path>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone     Clone a repository into a new directory\n   init      Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add       Add file contents to the index\n   mv        Move or rename a file, a directory, or a symlink\n   restore   Restore working tree files\n   rm        Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect    Use binary search to find the commit that introduced a bug\n   diff      Show changes between commits, commit and working tree, etc\n   grep      Print lines matching a pattern\n   log       Show commit logs\n   show      Show various types of objects\n   status    Show the working tree status\n\ngrow, mark and tweak your common history\n   branch    List, create, or delete branches\n   commit    Record changes to the repository\n   merge     Join two or more development histories together\n   rebase    Reapply commits on top of another base tip\n   reset     Reset current HEAD to the specified state\n   switch    Switch branches\n   tag       Create, list, delete or verify a tag object signed with GPG\n\ncollaborate (see also: git help workflows)\n   fetch     Download objects and refs from another repository\n   pull      Fetch from and integrate with another repository or a local branch\n   push      Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m23:40:46.799541 [debug] [MainThread]: STDERR: "b''"
+[0m23:40:46.799822 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m23:40:46.800210 [info ] [MainThread]: Connection:
+[0m23:40:46.800854 [info ] [MainThread]:   host: demo-cluster.cnp6ksjha1o5.us-west-2.redshift.amazonaws.com
+[0m23:40:46.801395 [info ] [MainThread]:   user: admin
+[0m23:40:46.801916 [info ] [MainThread]:   port: 5439
+[0m23:40:46.802454 [info ] [MainThread]:   database: demo_db
+[0m23:40:46.802903 [info ] [MainThread]:   method: database
+[0m23:40:46.803393 [info ] [MainThread]:   cluster_id: None
+[0m23:40:46.803829 [info ] [MainThread]:   iam_profile: None
+[0m23:40:46.804306 [info ] [MainThread]:   schema: public
+[0m23:40:46.804819 [info ] [MainThread]:   sslmode: require
+[0m23:40:46.805331 [info ] [MainThread]:   region: None
+[0m23:40:46.805779 [info ] [MainThread]:   sslmode: require
+[0m23:40:46.806221 [info ] [MainThread]:   region: None
+[0m23:40:46.806808 [info ] [MainThread]:   autocreate: False
+[0m23:40:46.807361 [info ] [MainThread]:   db_groups: []
+[0m23:40:46.807821 [info ] [MainThread]:   ra3_node: False
+[0m23:40:46.808341 [info ] [MainThread]:   connect_timeout: 10
+[0m23:40:46.808738 [info ] [MainThread]:   role: None
+[0m23:40:46.809156 [info ] [MainThread]:   retries: 1
+[0m23:40:46.809634 [info ] [MainThread]:   autocommit: True
+[0m23:40:46.809979 [info ] [MainThread]:   access_key_id: None
+[0m23:40:46.810386 [info ] [MainThread]:   is_serverless: None
+[0m23:40:46.810964 [info ] [MainThread]: Registered adapter: redshift=1.9.3
+[0m23:40:46.881118 [debug] [MainThread]: Acquiring new redshift connection 'debug'
+[0m23:40:46.887143 [debug] [MainThread]: Using redshift connection "debug"
+[0m23:40:46.887618 [debug] [MainThread]: On debug: select 1 as id
+[0m23:40:46.887899 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m23:40:46.888212 [debug] [MainThread]: Redshift adapter: Connecting to Redshift with 'database' credentials method
+[0m23:40:46.893240 [debug] [MainThread]: Redshift adapter: Establishing connection using ssl with `sslmode` set to 'require'.To connect without ssl, set `sslmode` to 'disable'.
+[0m23:40:50.035360 [debug] [MainThread]: SQL status: SUCCESS in 3.147 seconds
+[0m23:40:50.096349 [debug] [MainThread]: On debug: Close
+[0m23:40:50.096885 [info ] [MainThread]:   Connection test: [[32mOK connection ok[0m]
+
+[0m23:40:50.097385 [info ] [MainThread]: [31m1 check failed:[0m
+[0m23:40:50.098040 [info ] [MainThread]: Project loading failed for the following reason:
+ project path </home/anaconda/aircrash-data-pipeline/terraform/dbt_project.yml> not found
+
+[0m23:40:50.099216 [debug] [MainThread]: Resource report: {"command_name": "debug", "command_success": false, "command_wall_clock_time": 3.546632, "process_in_blocks": "2152", "process_kernel_time": 0.02986, "process_mem_max_rss": "114188", "process_out_blocks": "16", "process_user_time": 1.721961}
+[0m23:40:50.099661 [debug] [MainThread]: Command `dbt debug` failed at 23:40:50.099552 after 3.55 seconds
+[0m23:40:50.100012 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m23:40:50.100585 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fe1228f5f00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fe121176fe0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fe1211749d0>]}
+[0m23:40:50.101326 [debug] [MainThread]: Flushing usage events
+[0m23:40:51.178019 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m02:53:49.075133 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6905ae6020>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6904a7f520>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6904a7f4c0>]}
+
+
+============================== 02:53:49.078080 | c59af6a3-a793-40ad-8238-282c153b0089 ==============================
+[0m02:53:49.078080 [info ] [MainThread]: Running with dbt=1.10.0-b2
+[0m02:53:49.078707 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'debug': 'False', 'profiles_dir': '/home/anaconda/.dbt', 'log_path': 'logs', 'version_check': 'True', 'fail_fast': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'empty': 'False', 'quiet': 'False', 'no_print': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'introspect': 'True', 'invocation_command': 'dbt run --select stg_airplane_crashes', 'target_path': 'None', 'log_format': 'default', 'send_anonymous_usage_stats': 'True'}
+[0m02:53:49.079242 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path /home/anaconda/aircrash-data-pipeline/terraform/dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m02:53:49.080448 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": false, "command_wall_clock_time": 0.0885825, "process_in_blocks": "0", "process_kernel_time": 0.050122, "process_mem_max_rss": "93612", "process_out_blocks": "8", "process_user_time": 1.543776}
+[0m02:53:49.081373 [debug] [MainThread]: Command `dbt run` failed at 02:53:49.081189 after 0.09 seconds
+[0m02:53:49.081983 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6905ae6020>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6904a7fbe0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6904a7f520>]}
+[0m02:53:49.082549 [debug] [MainThread]: Flushing usage events
+[0m02:53:50.406514 [debug] [MainThread]: An error was encountered while trying to flush usage events
