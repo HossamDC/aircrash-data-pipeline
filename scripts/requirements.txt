@@ -1,0 +1,6 @@
+pandas
+boto3
+requests
+datasets
+s3fs
+psycopg2-binary

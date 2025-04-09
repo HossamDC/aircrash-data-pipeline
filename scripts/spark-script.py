@@ -1,50 +1,38 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import (
-    to_date, year, month, col, when, round, split, trim
-)
+from pyspark.sql.functions import to_date, year, month, col, when, round, split, trim
 
-# Create Spark Session
-spark = SparkSession.builder.appName("HFPlaneCrashes").getOrCreate()
+# Create Spark session
+spark = SparkSession.builder.appName("RewriteForRedshift").getOrCreate()
 
-# Load CSV from S3
+# Read original CSV
 df = spark.read.option("header", True).csv("s3://my-spark-stage-23-3-1998-v1-01/plane_crashes/raw_hf_airplane_crashes.csv")
 
-# Clean and cast numeric fields
-df = df.withColumn("Aboard", col("Aboard").cast("int")) \
-       .withColumn("Fatalities", col("Fatalities").cast("int")) \
-       .withColumn("Ground", col("Ground").cast("int"))
+# Transformations
+df = df.withColumn("crash_date", to_date("Date", "MM/dd/yyyy")) \
+       .withColumn("year", year("crash_date")) \
+       .withColumn("aircraft_maker", trim(split(col("Type"), " ").getItem(0))) \
+       .withColumn("aboard", col("Aboard").cast("int")) \
+       .withColumn("fatalities", col("Fatalities").cast("int")) \
+       .withColumn("ground", col("Ground").cast("int")) \
+       .withColumn("survivors", (col("aboard") - col("fatalities"))) \
+       .withColumn("severity_pct", round((col("fatalities") / col("aboard")) * 100, 1)) \
+       .withColumn("crash_severity", when(col("fatalities") == 0, "None")
+                   .when(col("severity_pct") < 5, "Low")
+                   .when(col("severity_pct") < 30, "Medium")
+                   .otherwise("High")) \
+       .withColumn("is_fatal", (col("fatalities") > 0).cast("boolean"))
 
-# Parse Date
-df = df.withColumn("Crash_Date", to_date("Date", "MM/dd/yyyy")) \
-       .withColumn("Year", year("Crash_Date")) \
-       .withColumn("Month", month("Crash_Date"))
-
-# Aircraft Maker
-df = df.withColumn("Aircraft_Maker", trim(split(col("Type"), " ").getItem(0)))
-
-# Survivors
-df = df.withColumn("Survivors", (col("Aboard") - col("Fatalities")))
-
-# Crash Severity
-df = df.withColumn("Severity_Pct", round((col("Fatalities") / col("Aboard")) * 100, 1))
-df = df.withColumn("Crash_Severity", when(col("Fatalities") == 0, "None")
-                   .when(col("Severity_Pct") < 5, "Low")
-                   .when(col("Severity_Pct") < 30, "Medium")
-                   .otherwise("High"))
-
-# Is Fatal Flag
-df = df.withColumn("Is_Fatal", (col("Fatalities") > 0).cast("boolean"))
-
-# Final columns
+# Final columns in lowercase to match Redshift schema
 df_final = df.select(
-    "Crash_Date", "Year", "Location", "Operator", "Type",
-    "Aircraft_Maker", "Aboard", "Fatalities", "Ground", "Survivors",
-    "Is_Fatal", "Crash_Severity"
+    "crash_date", "Location", "Operator", "Type", "aircraft_maker",
+    "aboard", "fatalities", "ground", "survivors", "is_fatal",
+    "crash_severity", "year"
 )
 
-# Write Parquet partitioned by Year only
+# Repartition by year and write to S3
 df_final.write.mode("overwrite") \
-    .partitionBy("Year") \
+    .partitionBy("year") \
+    .option("compression", "snappy") \
     .parquet("s3://my-spark-stage-23-3-1998-v1-01/plane_crashes/processed_parquet/")
 
-print("✅ ETL Complete: Parquet written to S3 partitioned by Year only.")
+print("✅ Parquet rewritten with compatible schema for Redshift Spectrum.")
