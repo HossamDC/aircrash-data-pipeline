@@ -467,4 +467,196 @@ Terraform will perform the following actions:
               [31m-[0m[0m from_port        = 5439
               [31m-[0m[0m ipv6_cidr_blocks = []
               [31m-[0m[0m prefix_list_ids  = []
-              [31m-[0m[0m protocol  
+              [31m-[0m[0m protocol         = "tcp"
+              [31m-[0m[0m security_groups  = []
+              [31m-[0m[0m self             = false
+              [31m-[0m[0m to_port          = 5439
+                [90m# (1 unchanged attribute hidden)[0m[0m
+            },
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m name                   = "redshift-sg" [90m-> null[0m[0m
+      [31m-[0m[0m owner_id               = "381492085524" [90m-> null[0m[0m
+      [31m-[0m[0m revoke_rules_on_delete = false [90m-> null[0m[0m
+      [31m-[0m[0m tags                   = {
+          [31m-[0m[0m "Name" = "Redshift SG"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all               = {
+          [31m-[0m[0m "Name" = "Redshift SG"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m vpc_id                 = "vpc-03675f21362ca33bd" [90m-> null[0m[0m
+        [90m# (1 unchanged attribute hidden)[0m[0m
+    }
+
+[1mPlan:[0m 0 to add, 0 to change, 15 to destroy.
+[0m
+Changes to Outputs:
+  [31m-[0m[0m emr_master_public_dns = "ec2-34-223-66-114.us-west-2.compute.amazonaws.com" [90m-> null[0m[0m
+  [31m-[0m[0m redshift_db           = "demo_db" [90m-> null[0m[0m
+  [31m-[0m[0m redshift_host         = "demo-cluster.cnp6ksjha1o5.us-west-2.redshift.amazonaws.com:5439" [90m-> null[0m[0m
+  [31m-[0m[0m redshift_user         = "admin" [90m-> null[0m[0m
+  [31m-[0m[0m ssh_command_to_emr    = "ssh -i my-key-pair-EMR.pem hadoop@ec2-34-223-66-114.us-west-2.compute.amazonaws.com" [90m-> null[0m[0m
+[0m[1m
+Do you really want to destroy all resources?[0m
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  [1mEnter a value:[0m [0myes
+
+[0m[1maws_iam_policy_attachment.emr_ec2_policy: Destroying... [id=emr_ec2_policy_attachment][0m[0m
+[0m[1maws_iam_policy_attachment.emr_service_policy: Destroying... [id=emr_service_policy_attachment][0m[0m
+[0m[1maws_iam_role_policy_attachment.spectrum_glue_access: Destroying... [id=RedshiftSpectrumRole-20250408235238577400000002][0m[0m
+[0m[1maws_iam_role_policy_attachment.spectrum_s3_access: Destroying... [id=RedshiftSpectrumRole-20250408235238686300000003][0m[0m
+[0m[1maws_iam_role_policy_attachment.redshift_s3_access: Destroying... [id=RedshiftS3AccessRole-20250408235238448800000001][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Destroying... [id=demo-cluster][0m[0m
+[0m[1maws_s3_bucket.data_bucket: Destroying... [id=my-spark-stage-23-3-1998-v1-01][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Destroying... [id=j-3NOX3WGGJ05QI][0m[0m
+[0m[1maws_iam_role_policy_attachment.redshift_s3_access: Destruction complete after 1s[0m
+[0m[1maws_iam_policy_attachment.emr_ec2_policy: Destruction complete after 2s[0m
+[0m[1maws_iam_role_policy_attachment.spectrum_s3_access: Destruction complete after 2s[0m
+[0m[1maws_iam_policy_attachment.emr_service_policy: Destruction complete after 2s[0m
+[0m[1maws_iam_role_policy_attachment.spectrum_glue_access: Destruction complete after 2s[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 10s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-3NOX3WGGJ05QI, 10s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 20s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-3NOX3WGGJ05QI, 20s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-3NOX3WGGJ05QI, 30s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 30s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 40s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-3NOX3WGGJ05QI, 40s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 50s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-3NOX3WGGJ05QI, 50s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 1m0s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-3NOX3WGGJ05QI, 1m0s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Destruction complete after 1m8s[0m
+[0m[1maws_iam_instance_profile.emr_profile: Destroying... [id=EMR_EC2_InstanceProfile][0m[0m
+[0m[1maws_iam_role.EMR_DefaultRole: Destroying... [id=EMR_DefaultRole][0m[0m
+[0m[1maws_iam_instance_profile.emr_profile: Destruction complete after 1s[0m
+[0m[1maws_iam_role.EMR_EC2_DefaultRole: Destroying... [id=EMR_EC2_DefaultRole][0m[0m
+[0m[1maws_iam_role.EMR_DefaultRole: Destruction complete after 1s[0m
+[0m[1maws_iam_role.EMR_EC2_DefaultRole: Destruction complete after 1s[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 1m10s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 1m20s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Destruction complete after 1m27s[0m
+[0m[1maws_redshift_subnet_group.demo_subnet_group: Destroying... [id=demo-subnet-group][0m[0m
+[0m[1maws_iam_role.redshift_role: Destroying... [id=RedshiftS3AccessRole][0m[0m
+[0m[1maws_security_group.redshift_sg: Destroying... [id=sg-09ec119c3d9fecc91][0m[0m
+[0m[1maws_iam_role.redshift_spectrum_role: Destroying... [id=RedshiftSpectrumRole][0m[0m
+[0m[1maws_redshift_subnet_group.demo_subnet_group: Destruction complete after 0s[0m
+[0m[1maws_iam_role.redshift_spectrum_role: Destruction complete after 0s[0m
+[0m[1maws_iam_role.redshift_role: Destruction complete after 0s[0m
+[0m[1maws_security_group.redshift_sg: Destruction complete after 2s[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mdeleting S3 Bucket (my-spark-stage-23-3-1998-v1-01): operation error S3: DeleteBucket, https response error StatusCode: 409, RequestID: 6Q43KNHJDVPYRQ9N, HostID: DJ2AmSoWqQ5jso/dl3d2+iciS6W+7YV9Q6NRlgTAYuJpPPFF5WGMSy3H2wAlpq6H87FteDIA0C4=, api error BucketNotEmpty: The bucket you tried to delete is not empty[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m
+[31m╵[0m[0m
+[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/terraform[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline/terraform[00m$ ls
+[?2004lemr-service-trust-policy.json  glue-read-policy.json  my-key-pair-EMR.pem       terraform.tfvars
+emr-trust-policy.json          [0m[01;34mlogs[0m                   outputs.tf                tf_outputs.json
+emr_ec2_permissions.json       main.tf                terraform.tfstate         variables.tf
+generate_profiles.py           main.tf.bkp-v1         terraform.tfstate.backup
+[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/terraform[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline/terraform[00m$ cd ..
+[?2004l[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline[00m$ ls
+[?2004lREADME.md  [0m[01;34maircrash_dwh[0m  [01;34mperfect[0m  [01;34mscripts[0m  [01;34mterraform[0m  typescript
+[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline[00m$ cd ..
+[?2004l[?2004h]0;anaconda@BVDS-H-Hamdy: ~[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~[00m$ ls
+[?2004l[0m[01;34maircrash-data-pipeline[0m  [01;34maws[0m  [01;31mawscliv2.zip[0m  [01;34mdbt-env[0m  [01;34mlogs[0m  [01;34mprefect-env[0m
+[?2004h]0;anaconda@BVDS-H-Hamdy: ~[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~[00m$ cd spa[K[K[K[K[K[Kcd aircrash-data-pipeline/
+[?2004l[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline[00m$ ls
+[?2004lREADME.md  [0m[01;34maircrash_dwh[0m  [01;34mperfect[0m  [01;34mscripts[0m  [01;34mterraform[0m  typescript
+[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline[00m$ cd scripts/
+[?2004l[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/scripts[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline/scripts[00m$ ls
+[?2004lpull-data.py  requirements.txt  [0m[01;32mschema.py[0m  spark-script.py
+[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/scripts[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline/scripts[00m$ nano [7mspark-test-job.py[27mspark-test-job.py
+[?2004l[?2004h[?1049h[22;0;0t[1;16r(B[m[4l[?7h[39;49m[?1h=[?1h=[?25l[39;49m(B[m[H[2J[14;52H(B[0;7m[ New File ](B[m[H(B[0;7m  GNU nano 6.2                                     spark-test-job.py                                              [1;113H(B[m[15d(B[0;7m^G(B[m Help[15;17H(B[0;7m^O(B[m Write Out    (B[0;7m^W(B[m Where Is     (B[0;7m^K(B[m Cut[15;65H(B[0;7m^T(B[m Execute[81G(B[0;7m^C(B[m Location     (B[0;7mM-U(B[m Undo[16d(B[0;7m^X(B[m Exit[16;17H(B[0;7m^R(B[m Read File    (B[0;7m^\(B[m Replace[49G(B[0;7m^U(B[m Paste[16;65H(B[0;7m^J(B[m Justify[81G(B[0;7m^/(B[m Go To Line   (B[0;7mM-E(B[m Redo[2d[?12l[?25h[?25l[14d[K[1;70H(B[0;7m*[113G(B[m[3d(B[0;1m[31m# ✅ Row count[4d[39m(B[mprint(f(B[0;1m[32m"✅ Number of rows: {df.count()}"[39m(B[m)[6d(B[0;1m[31m# ✅ Done[7d[39m(B[mspark.stop()[8d[?12l[?25h[?25l[14d(B[0;7mSave modified buffer?                                                                                             [15;1H Y(B[m Yes[K[16d(B[0;7m N(B[m No  [16;18H(B[0;7mC(B[m Cancel[K[14;23H[?12l[?25h[?25l[15d(B[0;7m^G(B[m Help[15;29H(B[0;7mM-D(B[m DOS Format[15;57H(B[0;7mM-A(B[m Append[15;85H(B[0;7mM-B(B[m Backup File[16d(B[0;7m^C(B[m Cancel[17G            (B[0;7mM-M(B[m Mac Format[16;57H(B[0;7mM-P(B[m Prepend[16;85H(B[0;7m^T(B[m Browse[14d(B[0;7mFile Name to Write: spark-test-job.py(B[m[?12l[?25h[?25l[14;50H[1K (B[0;7m[ Writing... ](B[m[K[1;70H(B[0;7m [113G(B[m[14;49H(B[0;7m[ Wrote 29 lines ](B[m[J[16d[?12l[?25h[16;1H[?1049l[23;0;0t[?1l>[?2004l[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/scripts[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline/scripts[00m$ [7maws s3 cp spark-test-job.py s3://my-spark-stage-23-3-1998-[27m[7mv[27m[7m1-01/scripts/spark-test-job.py [27m
+[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Caws s3 cp spark-test-job.py s3://my-spark-stage-23-3-1998-v1-01/scripts/spark-test-job.py
+[A
+[?2004lCompleted 648 Bytes/648 Bytes (682 Bytes/s) with 1 file(s) remainingupload: ./spark-test-job.py to s3://my-spark-stage-23-3-1998-v1-01/scripts/spark-test-job.py
+[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/scripts[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline/scripts[00m$ ؤي ز[K[K[K[Kcd ..
+[?2004l[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline[00m$ ls
+[?2004lREADME.md  [0m[01;34maircrash_dwh[0m  [01;34mperfect[0m  [01;34mscripts[0m  [01;34mterraform[0m  typescript
+[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline[00m$ cd terraform/
+[?2004l[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/terraform[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline/terraform[00m$ ls
+[?2004lemr-service-trust-policy.json  glue-read-policy.json  my-key-pair-EMR.pem       terraform.tfvars
+emr-trust-policy.json          [0m[01;34mlogs[0m                   outputs.tf                tf_outputs.json
+emr_ec2_permissions.json       main.tf                terraform.tfstate         variables.tf
+generate_profiles.py           main.tf.bkp-v1         terraform.tfstate.backup
+[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/terraform[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline/terraform[00m$ cat tf_outputs.json 
+[?2004l{
+  "redshift_db": {
+    "sensitive": false,
+    "type": "string",
+    "value": "demo_db"
+  },
+  "redshift_host": {
+    "sensitive": false,
+    "type": "string",
+    "value": "demo-cluster.cnp6ksjha1o5.us-west-2.redshift.amazonaws.com:5439"
+  },
+  "redshift_user": {
+    "sensitive": false,
+    "type": "string",
+    "value": "admin"
+  }
+}
+[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/terraform[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline/terraform[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/terraform[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline/terraform[00m$ ls
+[?2004lemr-service-trust-policy.json  glue-read-policy.json  my-key-pair-EMR.pem       terraform.tfvars
+emr-trust-policy.json          [0m[01;34mlogs[0m                   outputs.tf                tf_outputs.json
+emr_ec2_permissions.json       main.tf                terraform.tfstate         variables.tf
+generate_profiles.py           main.tf.bkp-v1         terraform.tfstate.backup
+[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/terraform[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline/terraform[00m$ cat [K[K[K[Kcat tf_outputs.json 
+[?2004l{
+  "redshift_db": {
+    "sensitive": false,
+    "type": "string",
+    "value": "demo_db"
+  },
+  "redshift_host": {
+    "sensitive": false,
+    "type": "string",
+    "value": "demo-cluster.cnp6ksjha1o5.us-west-2.redshift.amazonaws.com:5439"
+  },
+  "redshift_user": {
+    "sensitive": false,
+    "type": "string",
+    "value": "admin"
+  }
+}
+[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/terraform[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline/terraform[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/terraform[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline/terraform[00m$ ls
+[?2004lemr-service-trust-policy.json  glue-read-policy.json  my-key-pair-EMR.pem       terraform.tfvars
+emr-trust-policy.json          [0m[01;34mlogs[0m                   outputs.tf                tf_outputs.json
+emr_ec2_permissions.json       main.tf                terraform.tfstate         variables.tf
+generate_profiles.py           main.tf.bkp-v1         terraform.tfstate.backup
+[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/terraform[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline/terraform[00m$ cat outputs.tf 
+[?2004loutput "redshift_host" {
+  description = "Redshift cluster endpoint"
+  value       = aws_redshift_cluster.demo_cluster.endpoint
+}
+
+output "redshift_db" {
+  description = "Redshift database name"
+  value       = aws_redshift_cluster.demo_cluster.database_name
+}
+
+output "redshift_user" {
+  description = "Redshift master username"
+  value       = aws_redshift_cluster.demo_cluster.master_username
+}
+
+output "emr_master_public_dns" {
+  description = "Public DNS of EMR master node"
+  value       = aws_emr_cluster.spark_cluster.master_public_dns
+}
+
+output "ssh_command_to_emr" {
+  description = "SSH command to connect to EMR master"
+  value = "ssh -i my-key-pair-EMR.pem hadoop@${aws_emr_cluster.spark_cluster.master_public_dns}"
+}
+[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/terraform[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline/terraform[00m$ terraform outputs.tf [K[K[K[K[K
+[?2004lemr_master_public_dns = "ec2-44-242-252-32.us-west-2.compute.amazonaws.com"
+redshift_db = "demo_db"
+redshift_host = "demo-cluster.cnp6ksjha1o5.us-west-2.redshift.amazonaws.com:5439"
+redshift_user = "admin"
+ssh_command_to_emr = "ssh -i my-key-pair-EMR.pem hadoop@ec2
