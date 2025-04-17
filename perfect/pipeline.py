@@ -7,7 +7,7 @@ BASE_DIR = "/home/anaconda/aircrash-data-pipeline"
 TERRAFORM_DIR = os.path.join(BASE_DIR, "terraform")
 SCRIPTS_DIR = os.path.join(BASE_DIR, "scripts")
 DWH_DIR = os.path.join(BASE_DIR, "aircrash_dwh")
-REQUIREMENTS_PATH = os.path.join(BASE_DIR, "scripts", "requirements.txt")  # حطيت الملف هنا حسب طلبك
+REQUIREMENTS_PATH = os.path.join(BASE_DIR, "scripts", "requirements.txt")  
 TERRAFORM_OUTPUTS_PATH = os.path.join(BASE_DIR, "terraform", "tf_outputs.json")
 S3_SCRIPT_PATH = "s3://my-spark-stage-23-3-1998-v1-01/scripts/spark-test-job.py"
 PEM_PATH = os.path.join(BASE_DIR, "terraform", "my-key-pair-EMR.pem")
@@ -17,12 +17,36 @@ def terraform_apply():
     print("🚀 Running terraform apply...")
     try:
         subprocess.run(["terraform", "init"], cwd=TERRAFORM_DIR, check=True)
-        subprocess.run(["terraform", "apply", "-auto-approve"], cwd=TERRAFORM_DIR, check=True)
+        
+        # Run 'apply' without check=True so we can handle errors manually
+        result = subprocess.run(
+            ["terraform", "apply", "-auto-approve"],
+            cwd=TERRAFORM_DIR,
+            capture_output=True,
+            text=True
+        )
+
+        if result.returncode != 0:
+            stderr = result.stderr
+            tolerated_errors = [
+                "InvalidPermission.Duplicate",
+                "EntityAlreadyExists",
+                "InvalidGroup.Duplicate",
+                "already exists",
+            ]
+
+            if any(err in stderr for err in tolerated_errors):
+                print("⚠️ Terraform warning (tolerated):")
+                print(stderr)
+                print("✅ Continuing pipeline...")
+            else:
+                print("❌ Terraform failed with an unknown error:")
+                print(stderr)
+                raise subprocess.CalledProcessError(result.returncode, result.args, output=result.stdout, stderr=stderr)
+
     except subprocess.CalledProcessError as e:
-        if "InvalidPermission.Duplicate" in str(e):
-            print("⚠️ Duplicate security rule found — safe to ignore.")
-        else:
-            raise e
+        raise RuntimeError(f"❌ Terraform apply failed: {e.stderr}")
+
 
 @task
 def install_requirements():
@@ -85,12 +109,12 @@ def run_test_spark_job(emr_dns: str):
 @flow(name="Aircrash Phase 1 – Infra + Data")
 def phase_one_flow():
     install_requirements()
-    #terraform_apply()
-    # run_pull_data()
-    # run_create_external_table()
-    # run_add_partitions()
-    # run_generate_profiles()
-    #run_dbt()
+    terraform_apply()
+    run_pull_data()
+    run_create_external_table()
+    run_add_partitions()
+    run_generate_profiles()
+    run_dbt()
     emr_dns = get_emr_master_dns()
     run_test_spark_job(emr_dns)
     

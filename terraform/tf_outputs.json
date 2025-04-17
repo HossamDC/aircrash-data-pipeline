@@ -2,7 +2,7 @@
   "emr_master_public_dns": {
     "sensitive": false,
     "type": "string",
-    "value": "ec2-44-242-252-32.us-west-2.compute.amazonaws.com"
+    "value": "ec2-35-87-52-116.us-west-2.compute.amazonaws.com"
   },
   "redshift_db": {
     "sensitive": false,
@@ -22,6 +22,6 @@
   "ssh_command_to_emr": {
     "sensitive": false,
     "type": "string",
-    "value": "ssh -i my-key-pair-EMR.pem hadoop@ec2-44-242-252-32.us-west-2.compute.amazonaws.com"
+    "value": "ssh -i my-key-pair-EMR.pem hadoop@ec2-35-87-52-116.us-west-2.compute.amazonaws.com"
   }
 }

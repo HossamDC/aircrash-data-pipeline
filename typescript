@@ -659,4 +659,1620 @@ output "ssh_command_to_emr" {
 redshift_db = "demo_db"
 redshift_host = "demo-cluster.cnp6ksjha1o5.us-west-2.redshift.amazonaws.com:5439"
 redshift_user = "admin"
-ssh_command_to_emr = "ssh -i my-key-pair-EMR.pem hadoop@ec2
+ssh_command_to_emr = "ssh -i my-key-pair-EMR.pem hadoop@ec2-44-242-252-32.us-west-2.compute.amazonaws.com"
+[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/terraform[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline/terraform[00m$ [7mcat /home/anaconda/aircrash-data-pipeline/terraform/tf_o[27m[7mu[27m[7mtputs.json | jq . [27m
+[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccat /home/anaconda/aircrash-data-pipeline/terraform/tf_outputs.json | jq .
+[A
+[?2004lCommand 'jq' not found, but can be installed with:
+sudo apt install jq
+[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/terraform[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline/terraform[00m$ cat /home/anaconda/aircrash-data-pipeline/terraform/tf_outputs.json | jq .[K[K[K[K[K[K
+[?2004l{
+  "redshift_db": {
+    "sensitive": false,
+    "type": "string",
+    "value": "demo_db"
+  },
+  "redshift_host": {
+    "sensitive": false,
+    "type": "string",
+    "value": "demo-cluster.cnp6ksjha1o5.us-west-2.redshift.amazonaws.com:5439"
+  },
+  "redshift_user": {
+    "sensitive": false,
+    "type": "string",
+    "value": "admin"
+  }
+}
+[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/terraform[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline/terraform[00m$ terraform destroy -auto[K[K[K[K[K
+[?2004l[0m[1maws_iam_role.redshift_role: Refreshing state... [id=RedshiftS3AccessRole][0m
+[0m[1maws_iam_role.redshift_spectrum_role: Refreshing state... [id=RedshiftSpectrumRole][0m
+[0m[1maws_iam_role.EMR_EC2_DefaultRole: Refreshing state... [id=EMR_EC2_DefaultRole][0m
+[0m[1maws_redshift_subnet_group.demo_subnet_group: Refreshing state... [id=demo-subnet-group][0m
+[0m[1maws_iam_role.EMR_DefaultRole: Refreshing state... [id=EMR_DefaultRole][0m
+[0m[1maws_security_group.redshift_sg: Refreshing state... [id=sg-00dc22f97a33e74ca][0m
+[0m[1maws_s3_bucket.data_bucket: Refreshing state... [id=my-spark-stage-23-3-1998-v1-01][0m
+[0m[1maws_iam_policy_attachment.emr_ec2_policy: Refreshing state... [id=emr_ec2_policy_attachment][0m
+[0m[1maws_iam_instance_profile.emr_profile: Refreshing state... [id=EMR_EC2_InstanceProfile][0m
+[0m[1maws_iam_role_policy_attachment.redshift_s3_access: Refreshing state... [id=RedshiftS3AccessRole-20250410090202359000000003][0m
+[0m[1maws_iam_policy_attachment.emr_service_policy: Refreshing state... [id=emr_service_policy_attachment][0m
+[0m[1maws_iam_role_policy_attachment.spectrum_glue_access: Refreshing state... [id=RedshiftSpectrumRole-20250410090202112000000001][0m
+[0m[1maws_iam_role_policy_attachment.spectrum_s3_access: Refreshing state... [id=RedshiftSpectrumRole-20250410090202134400000002][0m
+[0m[1maws_redshift_cluster.demo_cluster: Refreshing state... [id=demo-cluster][0m
+[0m[1maws_emr_cluster.spark_cluster: Refreshing state... [id=j-3HASMATL2OC6K][0m
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated
+with the following symbols:
+  [31m-[0m destroy[0m
+
+Terraform will perform the following actions:
+
+[1m  # aws_emr_cluster.spark_cluster[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_emr_cluster" "spark_cluster" {
+      [31m-[0m[0m applications                      = [
+          [31m-[0m[0m "Spark",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m arn                               = "arn:aws:elasticmapreduce:us-west-2:381492085524:cluster/j-3HASMATL2OC6K" [90m-> null[0m[0m
+      [31m-[0m[0m cluster_state                     = "WAITING" [90m-> null[0m[0m
+      [31m-[0m[0m ebs_root_volume_size              = 0 [90m-> null[0m[0m
+      [31m-[0m[0m id                                = "j-3HASMATL2OC6K" [90m-> null[0m[0m
+      [31m-[0m[0m keep_job_flow_alive_when_no_steps = true [90m-> null[0m[0m
+      [31m-[0m[0m log_uri                           = "s3n://my-spark-stage-23-3-1998-v1-01/emr-logs/" [90m-> null[0m[0m
+      [31m-[0m[0m master_public_dns                 = "ec2-44-242-252-32.us-west-2.compute.amazonaws.com" [90m-> null[0m[0m
+      [31m-[0m[0m name                              = "MyEMRCluster" [90m-> null[0m[0m
+      [31m-[0m[0m placement_group_config            = [] [90m-> null[0m[0m
+      [31m-[0m[0m release_label                     = "emr-6.10.0" [90m-> null[0m[0m
+      [31m-[0m[0m scale_down_behavior               = "TERMINATE_AT_TASK_COMPLETION" [90m-> null[0m[0m
+      [31m-[0m[0m service_role                      = "arn:aws:iam::381492085524:role/EMR_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m step                              = [] [90m-> null[0m[0m
+      [31m-[0m[0m step_concurrency_level            = 1 [90m-> null[0m[0m
+      [31m-[0m[0m tags                              = {
+          [31m-[0m[0m "Environment"                              = "Dev"
+          [31m-[0m[0m "Name"                                     = "Spark Cluster"
+          [31m-[0m[0m "for-use-with-amazon-emr-managed-policies" = "true"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all                          = {
+          [31m-[0m[0m "Environment"                              = "Dev"
+          [31m-[0m[0m "Name"                                     = "Spark Cluster"
+          [31m-[0m[0m "for-use-with-amazon-emr-managed-policies" = "true"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m termination_protection            = false [90m-> null[0m[0m
+      [31m-[0m[0m unhealthy_node_replacement        = false [90m-> null[0m[0m
+      [31m-[0m[0m visible_to_all_users              = true [90m-> null[0m[0m
+        [90m# (4 unchanged attributes hidden)[0m[0m
+
+      [31m-[0m[0m core_instance_group {
+          [31m-[0m[0m id                 = "ig-29NJCA5DXNL67" [90m-> null[0m[0m
+          [31m-[0m[0m instance_count     = 2 [90m-> null[0m[0m
+          [31m-[0m[0m instance_type      = "m5.xlarge" [90m-> null[0m[0m
+            name               = [90mnull[0m[0m
+            [90m# (2 unchanged attributes hidden)[0m[0m
+
+          [31m-[0m[0m ebs_config {
+              [31m-[0m[0m iops                 = 0 [90m-> null[0m[0m
+              [31m-[0m[0m size                 = 32 [90m-> null[0m[0m
+              [31m-[0m[0m throughput           = 0 [90m-> null[0m[0m
+              [31m-[0m[0m type                 = "gp2" [90m-> null[0m[0m
+              [31m-[0m[0m volumes_per_instance = 2 [90m-> null[0m[0m
+            }
+        }
+
+      [31m-[0m[0m ec2_attributes {
+          [31m-[0m[0m emr_managed_master_security_group = "sg-015beb0175f56cf5f" [90m-> null[0m[0m
+          [31m-[0m[0m emr_managed_slave_security_group  = "sg-015beb0175f56cf5f" [90m-> null[0m[0m
+          [31m-[0m[0m instance_profile                  = "arn:aws:iam::381492085524:instance-profile/EMR_EC2_InstanceProfile" [90m-> null[0m[0m
+          [31m-[0m[0m key_name                          = "my-key-pair-EMR" [90m-> null[0m[0m
+          [31m-[0m[0m subnet_id                         = "subnet-0b89383302cc9b2c1" [90m-> null[0m[0m
+          [31m-[0m[0m subnet_ids                        = [
+              [31m-[0m[0m "subnet-0b89383302cc9b2c1",
+            ] [90m-> null[0m[0m
+            [90m# (3 unchanged attributes hidden)[0m[0m
+        }
+
+      [31m-[0m[0m master_instance_group {
+          [31m-[0m[0m id             = "ig-AB6WDGK0NB8R" [90m-> null[0m[0m
+          [31m-[0m[0m instance_count = 1 [90m-> null[0m[0m
+          [31m-[0m[0m instance_type  = "m5.xlarge" [90m-> null[0m[0m
+            name           = [90mnull[0m[0m
+            [90m# (1 unchanged attribute hidden)[0m[0m
+
+          [31m-[0m[0m ebs_config {
+              [31m-[0m[0m iops                 = 0 [90m-> null[0m[0m
+              [31m-[0m[0m size                 = 32 [90m-> null[0m[0m
+              [31m-[0m[0m throughput           = 0 [90m-> null[0m[0m
+              [31m-[0m[0m type                 = "gp2" [90m-> null[0m[0m
+              [31m-[0m[0m volumes_per_instance = 2 [90m-> null[0m[0m
+            }
+        }
+    }
+
+[1m  # aws_iam_instance_profile.emr_profile[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_instance_profile" "emr_profile" {
+      [31m-[0m[0m arn         = "arn:aws:iam::381492085524:instance-profile/EMR_EC2_InstanceProfile" [90m-> null[0m[0m
+      [31m-[0m[0m create_date = "2025-04-10T09:02:01Z" [90m-> null[0m[0m
+      [31m-[0m[0m id          = "EMR_EC2_InstanceProfile" [90m-> null[0m[0m
+      [31m-[0m[0m name        = "EMR_EC2_InstanceProfile" [90m-> null[0m[0m
+      [31m-[0m[0m path        = "/" [90m-> null[0m[0m
+      [31m-[0m[0m role        = "EMR_EC2_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m tags        = {} [90m-> null[0m[0m
+      [31m-[0m[0m tags_all    = {} [90m-> null[0m[0m
+      [31m-[0m[0m unique_id   = "AIPAVRUVTIMKOZNYMTQWU" [90m-> null[0m[0m
+        [90m# (1 unchanged attribute hidden)[0m[0m
+    }
+
+[1m  # aws_iam_policy_attachment.emr_ec2_policy[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_policy_attachment" "emr_ec2_policy" {
+      [31m-[0m[0m groups     = [] [90m-> null[0m[0m
+      [31m-[0m[0m id         = "emr_ec2_policy_attachment" [90m-> null[0m[0m
+      [31m-[0m[0m name       = "emr_ec2_policy_attachment" [90m-> null[0m[0m
+      [31m-[0m[0m policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonElasticMapReduceforEC2Role" [90m-> null[0m[0m
+      [31m-[0m[0m roles      = [
+          [31m-[0m[0m "EMR_EC2_DefaultRole",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m users      = [] [90m-> null[0m[0m
+    }
+
+[1m  # aws_iam_policy_attachment.emr_service_policy[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_policy_attachment" "emr_service_policy" {
+      [31m-[0m[0m groups     = [] [90m-> null[0m[0m
+      [31m-[0m[0m id         = "emr_service_policy_attachment" [90m-> null[0m[0m
+      [31m-[0m[0m name       = "emr_service_policy_attachment" [90m-> null[0m[0m
+      [31m-[0m[0m policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEMRServicePolicy_v2" [90m-> null[0m[0m
+      [31m-[0m[0m roles      = [
+          [31m-[0m[0m "EMR_DefaultRole",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m users      = [] [90m-> null[0m[0m
+    }
+
+[1m  # aws_iam_role.EMR_DefaultRole[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role" "EMR_DefaultRole" {
+      [31m-[0m[0m arn                   = "arn:aws:iam::381492085524:role/EMR_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m assume_role_policy    = jsonencode(
+            {
+              [31m-[0m[0m Statement = [
+                  [31m-[0m[0m {
+                      [31m-[0m[0m Action    = "sts:AssumeRole"
+                      [31m-[0m[0m Effect    = "Allow"
+                      [31m-[0m[0m Principal = {
+                          [31m-[0m[0m Service = "elasticmapreduce.amazonaws.com"
+                        }
+                    },
+                ]
+              [31m-[0m[0m Version   = "2012-10-17"
+            }
+        ) [90m-> null[0m[0m
+      [31m-[0m[0m create_date           = "2025-04-10T09:02:00Z" [90m-> null[0m[0m
+      [31m-[0m[0m force_detach_policies = false [90m-> null[0m[0m
+      [31m-[0m[0m id                    = "EMR_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m managed_policy_arns   = [
+          [31m-[0m[0m "arn:aws:iam::aws:policy/service-role/AmazonEMRServicePolicy_v2",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m max_session_duration  = 3600 [90m-> null[0m[0m
+      [31m-[0m[0m name                  = "EMR_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m path                  = "/" [90m-> null[0m[0m
+      [31m-[0m[0m tags                  = {
+          [31m-[0m[0m "for-use-with-amazon-emr-managed-policies" = "true"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all              = {
+          [31m-[0m[0m "for-use-with-amazon-emr-managed-policies" = "true"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m unique_id             = "AROAVRUVTIMKFR5ODPAWO" [90m-> null[0m[0m
+        [90m# (3 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # aws_iam_role.EMR_EC2_DefaultRole[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role" "EMR_EC2_DefaultRole" {
+      [31m-[0m[0m arn                   = "arn:aws:iam::381492085524:role/EMR_EC2_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m assume_role_policy    = jsonencode(
+            {
+              [31m-[0m[0m Statement = [
+                  [31m-[0m[0m {
+                      [31m-[0m[0m Action    = "sts:AssumeRole"
+                      [31m-[0m[0m Effect    = "Allow"
+                      [31m-[0m[0m Principal = {
+                          [31m-[0m[0m Service = "ec2.amazonaws.com"
+                        }
+                    },
+                ]
+              [31m-[0m[0m Version   = "2012-10-17"
+            }
+        ) [90m-> null[0m[0m
+      [31m-[0m[0m create_date           = "2025-04-10T09:02:00Z" [90m-> null[0m[0m
+      [31m-[0m[0m force_detach_policies = false [90m-> null[0m[0m
+      [31m-[0m[0m id                    = "EMR_EC2_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m managed_policy_arns   = [
+          [31m-[0m[0m "arn:aws:iam::aws:policy/service-role/AmazonElasticMapReduceforEC2Role",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m max_session_duration  = 3600 [90m-> null[0m[0m
+      [31m-[0m[0m name                  = "EMR_EC2_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m path                  = "/" [90m-> null[0m[0m
+      [31m-[0m[0m tags                  = {
+          [31m-[0m[0m "for-use-with-amazon-emr-managed-policies" = "true"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all              = {
+          [31m-[0m[0m "for-use-with-amazon-emr-managed-policies" = "true"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m unique_id             = "AROAVRUVTIMKDZJM2DXK2" [90m-> null[0m[0m
+        [90m# (3 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # aws_iam_role.redshift_role[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role" "redshift_role" {
+      [31m-[0m[0m arn                   = "arn:aws:iam::381492085524:role/RedshiftS3AccessRole" [90m-> null[0m[0m
+      [31m-[0m[0m assume_role_policy    = jsonencode(
+            {
+              [31m-[0m[0m Statement = [
+                  [31m-[0m[0m {
+                      [31m-[0m[0m Action    = "sts:AssumeRole"
+                      [31m-[0m[0m Effect    = "Allow"
+                      [31m-[0m[0m Principal = {
+                          [31m-[0m[0m Service = "redshift.amazonaws.com"
+                        }
+                    },
+                ]
+              [31m-[0m[0m Version   = "2012-10-17"
+            }
+        ) [90m-> null[0m[0m
+      [31m-[0m[0m create_date           = "2025-04-10T09:02:00Z" [90m-> null[0m[0m
+      [31m-[0m[0m force_detach_policies = false [90m-> null[0m[0m
+      [31m-[0m[0m id                    = "RedshiftS3AccessRole" [90m-> null[0m[0m
+      [31m-[0m[0m managed_policy_arns   = [
+          [31m-[0m[0m "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m max_session_duration  = 3600 [90m-> null[0m[0m
+      [31m-[0m[0m name                  = "RedshiftS3AccessRole" [90m-> null[0m[0m
+      [31m-[0m[0m path                  = "/" [90m-> null[0m[0m
+      [31m-[0m[0m tags                  = {} [90m-> null[0m[0m
+      [31m-[0m[0m tags_all              = {} [90m-> null[0m[0m
+      [31m-[0m[0m unique_id             = "AROAVRUVTIMKBF4EWOHCM" [90m-> null[0m[0m
+        [90m# (3 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # aws_iam_role.redshift_spectrum_role[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role" "redshift_spectrum_role" {
+      [31m-[0m[0m arn                   = "arn:aws:iam::381492085524:role/RedshiftSpectrumRole" [90m-> null[0m[0m
+      [31m-[0m[0m assume_role_policy    = jsonencode(
+            {
+              [31m-[0m[0m Statement = [
+                  [31m-[0m[0m {
+                      [31m-[0m[0m Action    = "sts:AssumeRole"
+                      [31m-[0m[0m Effect    = "Allow"
+                      [31m-[0m[0m Principal = {
+                          [31m-[0m[0m Service = "redshift.amazonaws.com"
+                        }
+                    },
+                ]
+              [31m-[0m[0m Version   = "2012-10-17"
+            }
+        ) [90m-> null[0m[0m
+      [31m-[0m[0m create_date           = "2025-04-10T09:02:00Z" [90m-> null[0m[0m
+      [31m-[0m[0m force_detach_policies = false [90m-> null[0m[0m
+      [31m-[0m[0m id                    = "RedshiftSpectrumRole" [90m-> null[0m[0m
+      [31m-[0m[0m managed_policy_arns   = [
+          [31m-[0m[0m "arn:aws:iam::aws:policy/AWSGlueConsoleFullAccess",
+          [31m-[0m[0m "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m max_session_duration  = 3600 [90m-> null[0m[0m
+      [31m-[0m[0m name                  = "RedshiftSpectrumRole" [90m-> null[0m[0m
+      [31m-[0m[0m path                  = "/" [90m-> null[0m[0m
+      [31m-[0m[0m tags                  = {} [90m-> null[0m[0m
+      [31m-[0m[0m tags_all              = {} [90m-> null[0m[0m
+      [31m-[0m[0m unique_id             = "AROAVRUVTIMKOQUGT72AC" [90m-> null[0m[0m
+        [90m# (3 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # aws_iam_role_policy_attachment.redshift_s3_access[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role_policy_attachment" "redshift_s3_access" {
+      [31m-[0m[0m id         = "RedshiftS3AccessRole-20250410090202359000000003" [90m-> null[0m[0m
+      [31m-[0m[0m policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess" [90m-> null[0m[0m
+      [31m-[0m[0m role       = "RedshiftS3AccessRole" [90m-> null[0m[0m
+    }
+
+[1m  # aws_iam_role_policy_attachment.spectrum_glue_access[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role_policy_attachment" "spectrum_glue_access" {
+      [31m-[0m[0m id         = "RedshiftSpectrumRole-20250410090202112000000001" [90m-> null[0m[0m
+      [31m-[0m[0m policy_arn = "arn:aws:iam::aws:policy/AWSGlueConsoleFullAccess" [90m-> null[0m[0m
+      [31m-[0m[0m role       = "RedshiftSpectrumRole" [90m-> null[0m[0m
+    }
+
+[1m  # aws_iam_role_policy_attachment.spectrum_s3_access[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role_policy_attachment" "spectrum_s3_access" {
+      [31m-[0m[0m id         = "RedshiftSpectrumRole-20250410090202134400000002" [90m-> null[0m[0m
+      [31m-[0m[0m policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess" [90m-> null[0m[0m
+      [31m-[0m[0m role       = "RedshiftSpectrumRole" [90m-> null[0m[0m
+    }
+
+[1m  # aws_redshift_cluster.demo_cluster[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_redshift_cluster" "demo_cluster" {
+      [31m-[0m[0m allow_version_upgrade                = true [90m-> null[0m[0m
+      [31m-[0m[0m apply_immediately                    = false [90m-> null[0m[0m
+      [31m-[0m[0m aqua_configuration_status            = "auto" [90m-> null[0m[0m
+      [31m-[0m[0m arn                                  = "arn:aws:redshift:us-west-2:381492085524:cluster:demo-cluster" [90m-> null[0m[0m
+      [31m-[0m[0m automated_snapshot_retention_period  = 1 [90m-> null[0m[0m
+      [31m-[0m[0m availability_zone                    = "us-west-2c" [90m-> null[0m[0m
+      [31m-[0m[0m availability_zone_relocation_enabled = false [90m-> null[0m[0m
+      [31m-[0m[0m cluster_identifier                   = "demo-cluster" [90m-> null[0m[0m
+      [31m-[0m[0m cluster_namespace_arn                = "arn:aws:redshift:us-west-2:381492085524:namespace:ca1796e7-0d75-4427-a790-b25db23627ce" [90m-> null[0m[0m
+      [31m-[0m[0m cluster_nodes                        = [
+          [31m-[0m[0m {
+              [31m-[0m[0m node_role          = "SHARED"
+              [31m-[0m[0m private_ip_address = "172.31.9.255"
+              [31m-[0m[0m public_ip_address  = "44.235.145.153"
+            },
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m cluster_parameter_group_name         = "default.redshift-2.0" [90m-> null[0m[0m
+      [31m-[0m[0m cluster_public_key                   = <<-EOT
+            ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD7P1ZIFidMwCoLfb9Xld2UBUJz78dFepjqMHk13jkKfbIzwRcfesQ3A59s0Gf+5uF1PuaewS4wR2oqimxNWphPzkxbp+1/iuKoPV9JnErFjGoCyQmsZ9r3XzcbI0/vhlHNHBK/1wlF+kcovhNSG8SKCH5wZjDnk+ps5E8FQYNvHobEd+0Tl4sYbssPY8fHpHQDV0tsMpcwBlTxZR9ht99gfgOUGvgHnFZN2i3oZQfoiLdtTEacZCy1D8XHefEwNKaUqg3htSgCklp4G3CKguy6JtYWajQJm1voB/aB+LXPmEuhDLnqHrZgBriY7COzWMiWYbIbw90MUMz/TJp57g+d Amazon-Redshift
+        EOT [90m-> null[0m[0m
+      [31m-[0m[0m cluster_revision_number              = "109768" [90m-> null[0m[0m
+      [31m-[0m[0m cluster_subnet_group_name            = "demo-subnet-group" [90m-> null[0m[0m
+      [31m-[0m[0m cluster_type                         = "single-node" [90m-> null[0m[0m
+      [31m-[0m[0m cluster_version                      = "1.0" [90m-> null[0m[0m
+      [31m-[0m[0m database_name                        = "demo_db" [90m-> null[0m[0m
+      [31m-[0m[0m dns_name                             = "demo-cluster.cnp6ksjha1o5.us-west-2.redshift.amazonaws.com" [90m-> null[0m[0m
+      [31m-[0m[0m encrypted                            = true [90m-> null[0m[0m
+      [31m-[0m[0m endpoint                             = "demo-cluster.cnp6ksjha1o5.us-west-2.redshift.amazonaws.com:5439" [90m-> null[0m[0m
+      [31m-[0m[0m enhanced_vpc_routing                 = false [90m-> null[0m[0m
+      [31m-[0m[0m iam_roles                            = [
+          [31m-[0m[0m "arn:aws:iam::381492085524:role/RedshiftS3AccessRole",
+          [31m-[0m[0m "arn:aws:iam::381492085524:role/RedshiftSpectrumRole",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m id                                   = "demo-cluster" [90m-> null[0m[0m
+      [31m-[0m[0m kms_key_id                           = "AWS_OWNED_KMS_KEY" [90m-> null[0m[0m
+      [31m-[0m[0m maintenance_track_name               = "current" [90m-> null[0m[0m
+      [31m-[0m[0m manual_snapshot_retention_period     = -1 [90m-> null[0m[0m
+      [31m-[0m[0m master_password                      = (sensitive value) [90m-> null[0m[0m
+      [31m-[0m[0m master_password_wo                   = (write-only attribute) [90m-> null[0m[0m
+      [31m-[0m[0m master_username                      = "admin" [90m-> null[0m[0m
+      [31m-[0m[0m multi_az                             = false [90m-> null[0m[0m
+      [31m-[0m[0m node_type                            = "dc2.large" [90m-> null[0m[0m
+      [31m-[0m[0m number_of_nodes                      = 1 [90m-> null[0m[0m
+      [31m-[0m[0m port                                 = 5439 [90m-> null[0m[0m
+      [31m-[0m[0m preferred_maintenance_window         = "fri:12:00-fri:12:30" [90m-> null[0m[0m
+      [31m-[0m[0m publicly_accessible                  = true [90m-> null[0m[0m
+      [31m-[0m[0m skip_final_snapshot                  = true [90m-> null[0m[0m
+      [31m-[0m[0m tags                                 = {
+          [31m-[0m[0m "Environment" = "Dev"
+          [31m-[0m[0m "Name"        = "Demo Cluster"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all                             = {
+          [31m-[0m[0m "Environment" = "Dev"
+          [31m-[0m[0m "Name"        = "Demo Cluster"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m vpc_security_group_ids               = [
+          [31m-[0m[0m "sg-00dc22f97a33e74ca",
+        ] [90m-> null[0m[0m
+        [90m# (3 unchanged attributes hidden)[0m[0m
+
+      [31m-[0m[0m logging {
+          [31m-[0m[0m enable               = false [90m-> null[0m[0m
+          [31m-[0m[0m log_exports          = [] [90m-> null[0m[0m
+            [90m# (3 unchanged attributes hidden)[0m[0m
+        }
+    }
+
+[1m  # aws_redshift_subnet_group.demo_subnet_group[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_redshift_subnet_group" "demo_subnet_group" {
+      [31m-[0m[0m arn         = "arn:aws:redshift:us-west-2:381492085524:subnetgroup:demo-subnet-group" [90m-> null[0m[0m
+      [31m-[0m[0m description = "Managed by Terraform" [90m-> null[0m[0m
+      [31m-[0m[0m id          = "demo-subnet-group" [90m-> null[0m[0m
+      [31m-[0m[0m name        = "demo-subnet-group" [90m-> null[0m[0m
+      [31m-[0m[0m subnet_ids  = [
+          [31m-[0m[0m "subnet-01e5b7a12aa5dfa94",
+          [31m-[0m[0m "subnet-06eb68aa5e99d735d",
+          [31m-[0m[0m "subnet-0b89383302cc9b2c1",
+          [31m-[0m[0m "subnet-0c7a53c5ec9e6d3bc",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m tags        = {
+          [31m-[0m[0m "Name" = "Demo Subnet Group"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all    = {
+          [31m-[0m[0m "Name" = "Demo Subnet Group"
+        } [90m-> null[0m[0m
+    }
+
+[1m  # aws_s3_bucket.data_bucket[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_s3_bucket" "data_bucket" {
+      [31m-[0m[0m arn                         = "arn:aws:s3:::my-spark-stage-23-3-1998-v1-01" [90m-> null[0m[0m
+      [31m-[0m[0m bucket                      = "my-spark-stage-23-3-1998-v1-01" [90m-> null[0m[0m
+      [31m-[0m[0m bucket_domain_name          = "my-spark-stage-23-3-1998-v1-01.s3.amazonaws.com" [90m-> null[0m[0m
+      [31m-[0m[0m bucket_regional_domain_name = "my-spark-stage-23-3-1998-v1-01.s3.us-west-2.amazonaws.com" [90m-> null[0m[0m
+      [31m-[0m[0m force_destroy               = false [90m-> null[0m[0m
+      [31m-[0m[0m hosted_zone_id              = "Z3BJ6K6RIION7M" [90m-> null[0m[0m
+      [31m-[0m[0m id                          = "my-spark-stage-23-3-1998-v1-01" [90m-> null[0m[0m
+      [31m-[0m[0m object_lock_enabled         = false [90m-> null[0m[0m
+      [31m-[0m[0m region                      = "us-west-2" [90m-> null[0m[0m
+      [31m-[0m[0m request_payer               = "BucketOwner" [90m-> null[0m[0m
+      [31m-[0m[0m tags                        = {
+          [31m-[0m[0m "Environment" = "Dev"
+          [31m-[0m[0m "Name"        = "Spark Data Bucket"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all                    = {
+          [31m-[0m[0m "Environment" = "Dev"
+          [31m-[0m[0m "Name"        = "Spark Data Bucket"
+        } [90m-> null[0m[0m
+        [90m# (3 unchanged attributes hidden)[0m[0m
+
+      [31m-[0m[0m grant {
+          [31m-[0m[0m id          = "7b0f27dda9d32c9263a431144f91d286ba45196cfca7019f568db28af087187b" [90m-> null[0m[0m
+          [31m-[0m[0m permissions = [
+              [31m-[0m[0m "FULL_CONTROL",
+            ] [90m-> null[0m[0m
+          [31m-[0m[0m type        = "CanonicalUser" [90m-> null[0m[0m
+            [90m# (1 unchanged attribute hidden)[0m[0m
+        }
+
+      [31m-[0m[0m server_side_encryption_configuration {
+          [31m-[0m[0m rule {
+              [31m-[0m[0m bucket_key_enabled = false [90m-> null[0m[0m
+
+              [31m-[0m[0m apply_server_side_encryption_by_default {
+                  [31m-[0m[0m sse_algorithm     = "AES256" [90m-> null[0m[0m
+                    [90m# (1 unchanged attribute hidden)[0m[0m
+                }
+            }
+        }
+
+      [31m-[0m[0m versioning {
+          [31m-[0m[0m enabled    = false [90m-> null[0m[0m
+          [31m-[0m[0m mfa_delete = false [90m-> null[0m[0m
+        }
+    }
+
+[1m  # aws_security_group.redshift_sg[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_security_group" "redshift_sg" {
+      [31m-[0m[0m arn                    = "arn:aws:ec2:us-west-2:381492085524:security-group/sg-00dc22f97a33e74ca" [90m-> null[0m[0m
+      [31m-[0m[0m description            = "Security group for Redshift" [90m-> null[0m[0m
+      [31m-[0m[0m egress                 = [] [90m-> null[0m[0m
+      [31m-[0m[0m id                     = "sg-00dc22f97a33e74ca" [90m-> null[0m[0m
+      [31m-[0m[0m ingress                = [
+          [31m-[0m[0m {
+              [31m-[0m[0m cidr_blocks      = [
+                  [31m-[0m[0m "0.0.0.0/0",
+                ]
+              [31m-[0m[0m from_port        = 5439
+              [31m-[0m[0m ipv6_cidr_blocks = []
+              [31m-[0m[0m prefix_list_ids  = []
+              [31m-[0m[0m protocol         = "tcp"
+              [31m-[0m[0m security_groups  = []
+              [31m-[0m[0m self             = false
+              [31m-[0m[0m to_port          = 5439
+                [90m# (1 unchanged attribute hidden)[0m[0m
+            },
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m name                   = "redshift-sg" [90m-> null[0m[0m
+      [31m-[0m[0m owner_id               = "381492085524" [90m-> null[0m[0m
+      [31m-[0m[0m revoke_rules_on_delete = false [90m-> null[0m[0m
+      [31m-[0m[0m tags                   = {
+          [31m-[0m[0m "Name" = "Redshift SG"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all               = {
+          [31m-[0m[0m "Name" = "Redshift SG"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m vpc_id                 = "vpc-03675f21362ca33bd" [90m-> null[0m[0m
+        [90m# (1 unchanged attribute hidden)[0m[0m
+    }
+
+[1mPlan:[0m 0 to add, 0 to change, 15 to destroy.
+[0m
+Changes to Outputs:
+  [31m-[0m[0m emr_master_public_dns = "ec2-44-242-252-32.us-west-2.compute.amazonaws.com" [90m-> null[0m[0m
+  [31m-[0m[0m redshift_db           = "demo_db" [90m-> null[0m[0m
+  [31m-[0m[0m redshift_host         = "demo-cluster.cnp6ksjha1o5.us-west-2.redshift.amazonaws.com:5439" [90m-> null[0m[0m
+  [31m-[0m[0m redshift_user         = "admin" [90m-> null[0m[0m
+  [31m-[0m[0m ssh_command_to_emr    = "ssh -i my-key-pair-EMR.pem hadoop@ec2-44-242-252-32.us-west-2.compute.amazonaws.com" [90m-> null[0m[0m
+[0m[1m
+Do you really want to destroy all resources?[0m
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  [1mEnter a value:[0m [0myes
+
+[0m[1maws_iam_role_policy_attachment.spectrum_s3_access: Destroying... [id=RedshiftSpectrumRole-20250410090202134400000002][0m[0m
+[0m[1maws_iam_policy_attachment.emr_service_policy: Destroying... [id=emr_service_policy_attachment][0m[0m
+[0m[1maws_iam_role_policy_attachment.spectrum_glue_access: Destroying... [id=RedshiftSpectrumRole-20250410090202112000000001][0m[0m
+[0m[1maws_iam_role_policy_attachment.redshift_s3_access: Destroying... [id=RedshiftS3AccessRole-20250410090202359000000003][0m[0m
+[0m[1maws_iam_policy_attachment.emr_ec2_policy: Destroying... [id=emr_ec2_policy_attachment][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Destroying... [id=demo-cluster][0m[0m
+[0m[1maws_s3_bucket.data_bucket: Destroying... [id=my-spark-stage-23-3-1998-v1-01][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Destroying... [id=j-3HASMATL2OC6K][0m[0m
+[0m[1maws_iam_policy_attachment.emr_ec2_policy: Destruction complete after 1s[0m
+[0m[1maws_iam_policy_attachment.emr_service_policy: Destruction complete after 1s[0m
+[0m[1maws_iam_role_policy_attachment.spectrum_s3_access: Destruction complete after 1s[0m
+[0m[1maws_iam_role_policy_attachment.redshift_s3_access: Destruction complete after 1s[0m
+[0m[1maws_iam_role_policy_attachment.spectrum_glue_access: Destruction complete after 1s[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 10s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-3HASMATL2OC6K, 10s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-3HASMATL2OC6K, 20s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 20s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 30s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-3HASMATL2OC6K, 30s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-3HASMATL2OC6K, 40s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 40s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-3HASMATL2OC6K, 50s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 50s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-3HASMATL2OC6K, 1m0s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 1m0s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-3HASMATL2OC6K, 1m10s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 1m10s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Destruction complete after 1m18s[0m
+[0m[1maws_iam_instance_profile.emr_profile: Destroying... [id=EMR_EC2_InstanceProfile][0m[0m
+[0m[1maws_iam_role.EMR_DefaultRole: Destroying... [id=EMR_DefaultRole][0m[0m
+[0m[1maws_iam_instance_profile.emr_profile: Destruction complete after 1s[0m
+[0m[1maws_iam_role.EMR_EC2_DefaultRole: Destroying... [id=EMR_EC2_DefaultRole][0m[0m
+[0m[1maws_iam_role.EMR_DefaultRole: Destruction complete after 1s[0m
+[0m[1maws_iam_role.EMR_EC2_DefaultRole: Destruction complete after 1s[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 1m20s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Destruction complete after 1m26s[0m
+[0m[1maws_redshift_subnet_group.demo_subnet_group: Destroying... [id=demo-subnet-group][0m[0m
+[0m[1maws_iam_role.redshift_role: Destroying... [id=RedshiftS3AccessRole][0m[0m
+[0m[1maws_security_group.redshift_sg: Destroying... [id=sg-00dc22f97a33e74ca][0m[0m
+[0m[1maws_iam_role.redshift_spectrum_role: Destroying... [id=RedshiftSpectrumRole][0m[0m
+[0m[1maws_redshift_subnet_group.demo_subnet_group: Destruction complete after 1s[0m
+[0m[1maws_iam_role.redshift_role: Destruction complete after 1s[0m
+[0m[1maws_iam_role.redshift_spectrum_role: Destruction complete after 1s[0m
+[0m[1maws_security_group.redshift_sg: Destruction complete after 2s[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mdeleting S3 Bucket (my-spark-stage-23-3-1998-v1-01): operation error S3: DeleteBucket, https response error StatusCode: 409, RequestID: VKAJFQ8K4SF9A55Y, HostID: lMQg2k7jrmJJITO/XKOZ8v53xvyzUN/Fwci4Ove0mLDxxWcAYldgM4jnYVIK0AP7B2la8FoSG36Qiy39VhFYBKeMmt2htmA8, api error BucketNotEmpty: The bucket you tried to delete is not empty[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m
+[31m╵[0m[0m
+[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/terraform[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline/terraform[00m$ ls ../scc[Kripts/
+[?2004lpull-data.py  requirements.txt  [0m[01;32mschema.py[0m  spark-script.py  spark-test-job.py
+[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/terraform[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline/terraform[00m$ ^C[?2004l[?2004h[?2004l
+[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/terraform[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline/terraform[00m$ terraform destroy -auto-approve
+[?2004l[0m[1maws_iam_role.EMR_DefaultRole: Refreshing state... [id=EMR_DefaultRole][0m
+[0m[1maws_iam_role.EMR_EC2_DefaultRole: Refreshing state... [id=EMR_EC2_DefaultRole][0m
+[0m[1maws_iam_role.redshift_spectrum_role: Refreshing state... [id=RedshiftSpectrumRole][0m
+[0m[1maws_redshift_subnet_group.demo_subnet_group: Refreshing state... [id=demo-subnet-group][0m
+[0m[1maws_iam_role.redshift_role: Refreshing state... [id=RedshiftS3AccessRole][0m
+[0m[1maws_security_group.redshift_sg: Refreshing state... [id=sg-0b49f99874db09765][0m
+[0m[1maws_s3_bucket.data_bucket: Refreshing state... [id=my-spark-stage-23-3-1998-v1-01][0m
+[0m[1maws_iam_policy_attachment.emr_service_policy: Refreshing state... [id=emr_service_policy_attachment][0m
+[0m[1maws_iam_role_policy_attachment.spectrum_glue_access: Refreshing state... [id=RedshiftSpectrumRole-20250410104943980300000002][0m
+[0m[1maws_iam_role_policy_attachment.spectrum_s3_access: Refreshing state... [id=RedshiftSpectrumRole-20250410104943944100000001][0m
+[0m[1maws_iam_role_policy_attachment.redshift_s3_access: Refreshing state... [id=RedshiftS3AccessRole-20250410104944181900000003][0m
+[0m[1maws_iam_policy_attachment.emr_ec2_policy: Refreshing state... [id=emr_ec2_policy_attachment][0m
+[0m[1maws_iam_instance_profile.emr_profile: Refreshing state... [id=EMR_EC2_InstanceProfile][0m
+[0m[1maws_redshift_cluster.demo_cluster: Refreshing state... [id=demo-cluster][0m
+[0m[1maws_emr_cluster.spark_cluster: Refreshing state... [id=j-1N9SPUEX088TE][0m
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated
+with the following symbols:
+  [31m-[0m destroy[0m
+
+Terraform will perform the following actions:
+
+[1m  # aws_emr_cluster.spark_cluster[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_emr_cluster" "spark_cluster" {
+      [31m-[0m[0m applications                      = [
+          [31m-[0m[0m "Spark",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m arn                               = "arn:aws:elasticmapreduce:us-west-2:381492085524:cluster/j-1N9SPUEX088TE" [90m-> null[0m[0m
+      [31m-[0m[0m cluster_state                     = "WAITING" [90m-> null[0m[0m
+      [31m-[0m[0m ebs_root_volume_size              = 0 [90m-> null[0m[0m
+      [31m-[0m[0m id                                = "j-1N9SPUEX088TE" [90m-> null[0m[0m
+      [31m-[0m[0m keep_job_flow_alive_when_no_steps = true [90m-> null[0m[0m
+      [31m-[0m[0m log_uri                           = "s3n://my-spark-stage-23-3-1998-v1-01/emr-logs/" [90m-> null[0m[0m
+      [31m-[0m[0m master_public_dns                 = "ec2-35-88-44-145.us-west-2.compute.amazonaws.com" [90m-> null[0m[0m
+      [31m-[0m[0m name                              = "MyEMRCluster" [90m-> null[0m[0m
+      [31m-[0m[0m placement_group_config            = [] [90m-> null[0m[0m
+      [31m-[0m[0m release_label                     = "emr-6.10.0" [90m-> null[0m[0m
+      [31m-[0m[0m scale_down_behavior               = "TERMINATE_AT_TASK_COMPLETION" [90m-> null[0m[0m
+      [31m-[0m[0m service_role                      = "arn:aws:iam::381492085524:role/EMR_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m step                              = [] [90m-> null[0m[0m
+      [31m-[0m[0m step_concurrency_level            = 1 [90m-> null[0m[0m
+      [31m-[0m[0m tags                              = {
+          [31m-[0m[0m "Environment"                              = "Dev"
+          [31m-[0m[0m "Name"                                     = "Spark Cluster"
+          [31m-[0m[0m "for-use-with-amazon-emr-managed-policies" = "true"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all                          = {
+          [31m-[0m[0m "Environment"                              = "Dev"
+          [31m-[0m[0m "Name"                                     = "Spark Cluster"
+          [31m-[0m[0m "for-use-with-amazon-emr-managed-policies" = "true"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m termination_protection            = false [90m-> null[0m[0m
+      [31m-[0m[0m unhealthy_node_replacement        = false [90m-> null[0m[0m
+      [31m-[0m[0m visible_to_all_users              = true [90m-> null[0m[0m
+        [90m# (4 unchanged attributes hidden)[0m[0m
+
+      [31m-[0m[0m core_instance_group {
+          [31m-[0m[0m id                 = "ig-SUOTSUGUZ92V" [90m-> null[0m[0m
+          [31m-[0m[0m instance_count     = 2 [90m-> null[0m[0m
+          [31m-[0m[0m instance_type      = "m5.xlarge" [90m-> null[0m[0m
+            name               = [90mnull[0m[0m
+            [90m# (2 unchanged attributes hidden)[0m[0m
+
+          [31m-[0m[0m ebs_config {
+              [31m-[0m[0m iops                 = 0 [90m-> null[0m[0m
+              [31m-[0m[0m size                 = 32 [90m-> null[0m[0m
+              [31m-[0m[0m throughput           = 0 [90m-> null[0m[0m
+              [31m-[0m[0m type                 = "gp2" [90m-> null[0m[0m
+              [31m-[0m[0m volumes_per_instance = 2 [90m-> null[0m[0m
+            }
+        }
+
+      [31m-[0m[0m ec2_attributes {
+          [31m-[0m[0m emr_managed_master_security_group = "sg-015beb0175f56cf5f" [90m-> null[0m[0m
+          [31m-[0m[0m emr_managed_slave_security_group  = "sg-015beb0175f56cf5f" [90m-> null[0m[0m
+          [31m-[0m[0m instance_profile                  = "arn:aws:iam::381492085524:instance-profile/EMR_EC2_InstanceProfile" [90m-> null[0m[0m
+          [31m-[0m[0m key_name                          = "my-key-pair-EMR" [90m-> null[0m[0m
+          [31m-[0m[0m subnet_id                         = "subnet-0b89383302cc9b2c1" [90m-> null[0m[0m
+          [31m-[0m[0m subnet_ids                        = [
+              [31m-[0m[0m "subnet-0b89383302cc9b2c1",
+            ] [90m-> null[0m[0m
+            [90m# (3 unchanged attributes hidden)[0m[0m
+        }
+
+      [31m-[0m[0m master_instance_group {
+          [31m-[0m[0m id             = "ig-3GFRQW43SKW2T" [90m-> null[0m[0m
+          [31m-[0m[0m instance_count = 1 [90m-> null[0m[0m
+          [31m-[0m[0m instance_type  = "m5.xlarge" [90m-> null[0m[0m
+            name           = [90mnull[0m[0m
+            [90m# (1 unchanged attribute hidden)[0m[0m
+
+          [31m-[0m[0m ebs_config {
+              [31m-[0m[0m iops                 = 0 [90m-> null[0m[0m
+              [31m-[0m[0m size                 = 32 [90m-> null[0m[0m
+              [31m-[0m[0m throughput           = 0 [90m-> null[0m[0m
+              [31m-[0m[0m type                 = "gp2" [90m-> null[0m[0m
+              [31m-[0m[0m volumes_per_instance = 2 [90m-> null[0m[0m
+            }
+        }
+    }
+
+[1m  # aws_iam_instance_profile.emr_profile[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_instance_profile" "emr_profile" {
+      [31m-[0m[0m arn         = "arn:aws:iam::381492085524:instance-profile/EMR_EC2_InstanceProfile" [90m-> null[0m[0m
+      [31m-[0m[0m create_date = "2025-04-10T10:49:44Z" [90m-> null[0m[0m
+      [31m-[0m[0m id          = "EMR_EC2_InstanceProfile" [90m-> null[0m[0m
+      [31m-[0m[0m name        = "EMR_EC2_InstanceProfile" [90m-> null[0m[0m
+      [31m-[0m[0m path        = "/" [90m-> null[0m[0m
+      [31m-[0m[0m role        = "EMR_EC2_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m tags        = {} [90m-> null[0m[0m
+      [31m-[0m[0m tags_all    = {} [90m-> null[0m[0m
+      [31m-[0m[0m unique_id   = "AIPAVRUVTIMKJSMNXR4ZU" [90m-> null[0m[0m
+        [90m# (1 unchanged attribute hidden)[0m[0m
+    }
+
+[1m  # aws_iam_policy_attachment.emr_ec2_policy[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_policy_attachment" "emr_ec2_policy" {
+      [31m-[0m[0m groups     = [] [90m-> null[0m[0m
+      [31m-[0m[0m id         = "emr_ec2_policy_attachment" [90m-> null[0m[0m
+      [31m-[0m[0m name       = "emr_ec2_policy_attachment" [90m-> null[0m[0m
+      [31m-[0m[0m policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonElasticMapReduceforEC2Role" [90m-> null[0m[0m
+      [31m-[0m[0m roles      = [
+          [31m-[0m[0m "EMR_EC2_DefaultRole",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m users      = [] [90m-> null[0m[0m
+    }
+
+[1m  # aws_iam_policy_attachment.emr_service_policy[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_policy_attachment" "emr_service_policy" {
+      [31m-[0m[0m groups     = [] [90m-> null[0m[0m
+      [31m-[0m[0m id         = "emr_service_policy_attachment" [90m-> null[0m[0m
+      [31m-[0m[0m name       = "emr_service_policy_attachment" [90m-> null[0m[0m
+      [31m-[0m[0m policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEMRServicePolicy_v2" [90m-> null[0m[0m
+      [31m-[0m[0m roles      = [
+          [31m-[0m[0m "EMR_DefaultRole",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m users      = [] [90m-> null[0m[0m
+    }
+
+[1m  # aws_iam_role.EMR_DefaultRole[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role" "EMR_DefaultRole" {
+      [31m-[0m[0m arn                   = "arn:aws:iam::381492085524:role/EMR_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m assume_role_policy    = jsonencode(
+            {
+              [31m-[0m[0m Statement = [
+                  [31m-[0m[0m {
+                      [31m-[0m[0m Action    = "sts:AssumeRole"
+                      [31m-[0m[0m Effect    = "Allow"
+                      [31m-[0m[0m Principal = {
+                          [31m-[0m[0m Service = "elasticmapreduce.amazonaws.com"
+                        }
+                    },
+                ]
+              [31m-[0m[0m Version   = "2012-10-17"
+            }
+        ) [90m-> null[0m[0m
+      [31m-[0m[0m create_date           = "2025-04-10T10:49:42Z" [90m-> null[0m[0m
+      [31m-[0m[0m force_detach_policies = false [90m-> null[0m[0m
+      [31m-[0m[0m id                    = "EMR_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m managed_policy_arns   = [
+          [31m-[0m[0m "arn:aws:iam::aws:policy/service-role/AmazonEMRServicePolicy_v2",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m max_session_duration  = 3600 [90m-> null[0m[0m
+      [31m-[0m[0m name                  = "EMR_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m path                  = "/" [90m-> null[0m[0m
+      [31m-[0m[0m tags                  = {
+          [31m-[0m[0m "for-use-with-amazon-emr-managed-policies" = "true"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all              = {
+          [31m-[0m[0m "for-use-with-amazon-emr-managed-policies" = "true"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m unique_id             = "AROAVRUVTIMKHXPYJHIRZ" [90m-> null[0m[0m
+        [90m# (3 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # aws_iam_role.EMR_EC2_DefaultRole[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role" "EMR_EC2_DefaultRole" {
+      [31m-[0m[0m arn                   = "arn:aws:iam::381492085524:role/EMR_EC2_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m assume_role_policy    = jsonencode(
+            {
+              [31m-[0m[0m Statement = [
+                  [31m-[0m[0m {
+                      [31m-[0m[0m Action    = "sts:AssumeRole"
+                      [31m-[0m[0m Effect    = "Allow"
+                      [31m-[0m[0m Principal = {
+                          [31m-[0m[0m Service = "ec2.amazonaws.com"
+                        }
+                    },
+                ]
+              [31m-[0m[0m Version   = "2012-10-17"
+            }
+        ) [90m-> null[0m[0m
+      [31m-[0m[0m create_date           = "2025-04-10T10:49:42Z" [90m-> null[0m[0m
+      [31m-[0m[0m force_detach_policies = false [90m-> null[0m[0m
+      [31m-[0m[0m id                    = "EMR_EC2_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m managed_policy_arns   = [
+          [31m-[0m[0m "arn:aws:iam::aws:policy/service-role/AmazonElasticMapReduceforEC2Role",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m max_session_duration  = 3600 [90m-> null[0m[0m
+      [31m-[0m[0m name                  = "EMR_EC2_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m path                  = "/" [90m-> null[0m[0m
+      [31m-[0m[0m tags                  = {
+          [31m-[0m[0m "for-use-with-amazon-emr-managed-policies" = "true"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all              = {
+          [31m-[0m[0m "for-use-with-amazon-emr-managed-policies" = "true"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m unique_id             = "AROAVRUVTIMKKJ6IOY2GU" [90m-> null[0m[0m
+        [90m# (3 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # aws_iam_role.redshift_role[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role" "redshift_role" {
+      [31m-[0m[0m arn                   = "arn:aws:iam::381492085524:role/RedshiftS3AccessRole" [90m-> null[0m[0m
+      [31m-[0m[0m assume_role_policy    = jsonencode(
+            {
+              [31m-[0m[0m Statement = [
+                  [31m-[0m[0m {
+                      [31m-[0m[0m Action    = "sts:AssumeRole"
+                      [31m-[0m[0m Effect    = "Allow"
+                      [31m-[0m[0m Principal = {
+                          [31m-[0m[0m Service = "redshift.amazonaws.com"
+                        }
+                    },
+                ]
+              [31m-[0m[0m Version   = "2012-10-17"
+            }
+        ) [90m-> null[0m[0m
+      [31m-[0m[0m create_date           = "2025-04-10T10:49:42Z" [90m-> null[0m[0m
+      [31m-[0m[0m force_detach_policies = false [90m-> null[0m[0m
+      [31m-[0m[0m id                    = "RedshiftS3AccessRole" [90m-> null[0m[0m
+      [31m-[0m[0m managed_policy_arns   = [
+          [31m-[0m[0m "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m max_session_duration  = 3600 [90m-> null[0m[0m
+      [31m-[0m[0m name                  = "RedshiftS3AccessRole" [90m-> null[0m[0m
+      [31m-[0m[0m path                  = "/" [90m-> null[0m[0m
+      [31m-[0m[0m tags                  = {} [90m-> null[0m[0m
+      [31m-[0m[0m tags_all              = {} [90m-> null[0m[0m
+      [31m-[0m[0m unique_id             = "AROAVRUVTIMKHLOETOJIO" [90m-> null[0m[0m
+        [90m# (3 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # aws_iam_role.redshift_spectrum_role[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role" "redshift_spectrum_role" {
+      [31m-[0m[0m arn                   = "arn:aws:iam::381492085524:role/RedshiftSpectrumRole" [90m-> null[0m[0m
+      [31m-[0m[0m assume_role_policy    = jsonencode(
+            {
+              [31m-[0m[0m Statement = [
+                  [31m-[0m[0m {
+                      [31m-[0m[0m Action    = "sts:AssumeRole"
+                      [31m-[0m[0m Effect    = "Allow"
+                      [31m-[0m[0m Principal = {
+                          [31m-[0m[0m Service = "redshift.amazonaws.com"
+                        }
+                    },
+                ]
+              [31m-[0m[0m Version   = "2012-10-17"
+            }
+        ) [90m-> null[0m[0m
+      [31m-[0m[0m create_date           = "2025-04-10T10:49:42Z" [90m-> null[0m[0m
+      [31m-[0m[0m force_detach_policies = false [90m-> null[0m[0m
+      [31m-[0m[0m id                    = "RedshiftSpectrumRole" [90m-> null[0m[0m
+      [31m-[0m[0m managed_policy_arns   = [
+          [31m-[0m[0m "arn:aws:iam::aws:policy/AWSGlueConsoleFullAccess",
+          [31m-[0m[0m "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m max_session_duration  = 3600 [90m-> null[0m[0m
+      [31m-[0m[0m name                  = "RedshiftSpectrumRole" [90m-> null[0m[0m
+      [31m-[0m[0m path                  = "/" [90m-> null[0m[0m
+      [31m-[0m[0m tags                  = {} [90m-> null[0m[0m
+      [31m-[0m[0m tags_all              = {} [90m-> null[0m[0m
+      [31m-[0m[0m unique_id             = "AROAVRUVTIMKE7FQYFKBP" [90m-> null[0m[0m
+        [90m# (3 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # aws_iam_role_policy_attachment.redshift_s3_access[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role_policy_attachment" "redshift_s3_access" {
+      [31m-[0m[0m id         = "RedshiftS3AccessRole-20250410104944181900000003" [90m-> null[0m[0m
+      [31m-[0m[0m policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess" [90m-> null[0m[0m
+      [31m-[0m[0m role       = "RedshiftS3AccessRole" [90m-> null[0m[0m
+    }
+
+[1m  # aws_iam_role_policy_attachment.spectrum_glue_access[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role_policy_attachment" "spectrum_glue_access" {
+      [31m-[0m[0m id         = "RedshiftSpectrumRole-20250410104943980300000002" [90m-> null[0m[0m
+      [31m-[0m[0m policy_arn = "arn:aws:iam::aws:policy/AWSGlueConsoleFullAccess" [90m-> null[0m[0m
+      [31m-[0m[0m role       = "RedshiftSpectrumRole" [90m-> null[0m[0m
+    }
+
+[1m  # aws_iam_role_policy_attachment.spectrum_s3_access[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role_policy_attachment" "spectrum_s3_access" {
+      [31m-[0m[0m id         = "RedshiftSpectrumRole-20250410104943944100000001" [90m-> null[0m[0m
+      [31m-[0m[0m policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess" [90m-> null[0m[0m
+      [31m-[0m[0m role       = "RedshiftSpectrumRole" [90m-> null[0m[0m
+    }
+
+[1m  # aws_redshift_cluster.demo_cluster[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_redshift_cluster" "demo_cluster" {
+      [31m-[0m[0m allow_version_upgrade                = true [90m-> null[0m[0m
+      [31m-[0m[0m apply_immediately                    = false [90m-> null[0m[0m
+      [31m-[0m[0m aqua_configuration_status            = "auto" [90m-> null[0m[0m
+      [31m-[0m[0m arn                                  = "arn:aws:redshift:us-west-2:381492085524:cluster:demo-cluster" [90m-> null[0m[0m
+      [31m-[0m[0m automated_snapshot_retention_period  = 1 [90m-> null[0m[0m
+      [31m-[0m[0m availability_zone                    = "us-west-2a" [90m-> null[0m[0m
+      [31m-[0m[0m availability_zone_relocation_enabled = false [90m-> null[0m[0m
+      [31m-[0m[0m cluster_identifier                   = "demo-cluster" [90m-> null[0m[0m
+      [31m-[0m[0m cluster_namespace_arn                = "arn:aws:redshift:us-west-2:381492085524:namespace:db4c3b79-fac6-4f2c-b6d6-07bfedca4f7d" [90m-> null[0m[0m
+      [31m-[0m[0m cluster_nodes                        = [
+          [31m-[0m[0m {
+              [31m-[0m[0m node_role          = "SHARED"
+              [31m-[0m[0m private_ip_address = "172.31.37.142"
+              [31m-[0m[0m public_ip_address  = "100.21.43.155"
+            },
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m cluster_parameter_group_name         = "default.redshift-2.0" [90m-> null[0m[0m
+      [31m-[0m[0m cluster_public_key                   = <<-EOT
+            ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9jpNtPWMZ41pDZC8GROyeaTHBm1gW2SRyBwwXxEf6oXinBCoVamZ22xhBb//B/dCK9KCJbfbkJ8d3JK8w4PMXUETqHyu2L7GhmQLv0vlVIl9A2dWptnuzo9u8JWHPcvs6AbAAJcTy5ZVhm9tDne/Wl1h5r5YHe6NqBhINcFI8nPbmEFM7406Q2lekx3/OO21rS/Pj+HxNeges8UzMXYJ94X3t867CBX3NI5FYuJg5cXjgJoT/fzLIJvFVS3IskozmnlPG8dKSmzlLz89pNJpRWD4o6ATc3C0whMkM07TzJl9AuFOdVpUyfNM9cCZxaoWZwlWjLxQLtiXZ/IHYCpqN Amazon-Redshift
+        EOT [90m-> null[0m[0m
+      [31m-[0m[0m cluster_revision_number              = "109768" [90m-> null[0m[0m
+      [31m-[0m[0m cluster_subnet_group_name            = "demo-subnet-group" [90m-> null[0m[0m
+      [31m-[0m[0m cluster_type                         = "single-node" [90m-> null[0m[0m
+      [31m-[0m[0m cluster_version                      = "1.0" [90m-> null[0m[0m
+      [31m-[0m[0m database_name                        = "demo_db" [90m-> null[0m[0m
+      [31m-[0m[0m dns_name                             = "demo-cluster.cnp6ksjha1o5.us-west-2.redshift.amazonaws.com" [90m-> null[0m[0m
+      [31m-[0m[0m encrypted                            = true [90m-> null[0m[0m
+      [31m-[0m[0m endpoint                             = "demo-cluster.cnp6ksjha1o5.us-west-2.redshift.amazonaws.com:5439" [90m-> null[0m[0m
+      [31m-[0m[0m enhanced_vpc_routing                 = false [90m-> null[0m[0m
+      [31m-[0m[0m iam_roles                            = [
+          [31m-[0m[0m "arn:aws:iam::381492085524:role/RedshiftS3AccessRole",
+          [31m-[0m[0m "arn:aws:iam::381492085524:role/RedshiftSpectrumRole",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m id                                   = "demo-cluster" [90m-> null[0m[0m
+      [31m-[0m[0m kms_key_id                           = "AWS_OWNED_KMS_KEY" [90m-> null[0m[0m
+      [31m-[0m[0m maintenance_track_name               = "current" [90m-> null[0m[0m
+      [31m-[0m[0m manual_snapshot_retention_period     = -1 [90m-> null[0m[0m
+      [31m-[0m[0m master_password                      = (sensitive value) [90m-> null[0m[0m
+      [31m-[0m[0m master_password_wo                   = (write-only attribute) [90m-> null[0m[0m
+      [31m-[0m[0m master_username                      = "admin" [90m-> null[0m[0m
+      [31m-[0m[0m multi_az                             = false [90m-> null[0m[0m
+      [31m-[0m[0m node_type                            = "dc2.large" [90m-> null[0m[0m
+      [31m-[0m[0m number_of_nodes                      = 1 [90m-> null[0m[0m
+      [31m-[0m[0m port                                 = 5439 [90m-> null[0m[0m
+      [31m-[0m[0m preferred_maintenance_window         = "mon:08:30-mon:09:00" [90m-> null[0m[0m
+      [31m-[0m[0m publicly_accessible                  = true [90m-> null[0m[0m
+      [31m-[0m[0m skip_final_snapshot                  = true [90m-> null[0m[0m
+      [31m-[0m[0m tags                                 = {
+          [31m-[0m[0m "Environment" = "Dev"
+          [31m-[0m[0m "Name"        = "Demo Cluster"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all                             = {
+          [31m-[0m[0m "Environment" = "Dev"
+          [31m-[0m[0m "Name"        = "Demo Cluster"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m vpc_security_group_ids               = [
+          [31m-[0m[0m "sg-0b49f99874db09765",
+        ] [90m-> null[0m[0m
+        [90m# (3 unchanged attributes hidden)[0m[0m
+
+      [31m-[0m[0m logging {
+          [31m-[0m[0m enable               = false [90m-> null[0m[0m
+          [31m-[0m[0m log_exports          = [] [90m-> null[0m[0m
+            [90m# (3 unchanged attributes hidden)[0m[0m
+        }
+    }
+
+[1m  # aws_redshift_subnet_group.demo_subnet_group[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_redshift_subnet_group" "demo_subnet_group" {
+      [31m-[0m[0m arn         = "arn:aws:redshift:us-west-2:381492085524:subnetgroup:demo-subnet-group" [90m-> null[0m[0m
+      [31m-[0m[0m description = "Managed by Terraform" [90m-> null[0m[0m
+      [31m-[0m[0m id          = "demo-subnet-group" [90m-> null[0m[0m
+      [31m-[0m[0m name        = "demo-subnet-group" [90m-> null[0m[0m
+      [31m-[0m[0m subnet_ids  = [
+          [31m-[0m[0m "subnet-01e5b7a12aa5dfa94",
+          [31m-[0m[0m "subnet-06eb68aa5e99d735d",
+          [31m-[0m[0m "subnet-0b89383302cc9b2c1",
+          [31m-[0m[0m "subnet-0c7a53c5ec9e6d3bc",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m tags        = {
+          [31m-[0m[0m "Name" = "Demo Subnet Group"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all    = {
+          [31m-[0m[0m "Name" = "Demo Subnet Group"
+        } [90m-> null[0m[0m
+    }
+
+[1m  # aws_s3_bucket.data_bucket[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_s3_bucket" "data_bucket" {
+      [31m-[0m[0m arn                         = "arn:aws:s3:::my-spark-stage-23-3-1998-v1-01" [90m-> null[0m[0m
+      [31m-[0m[0m bucket                      = "my-spark-stage-23-3-1998-v1-01" [90m-> null[0m[0m
+      [31m-[0m[0m bucket_domain_name          = "my-spark-stage-23-3-1998-v1-01.s3.amazonaws.com" [90m-> null[0m[0m
+      [31m-[0m[0m bucket_regional_domain_name = "my-spark-stage-23-3-1998-v1-01.s3.us-west-2.amazonaws.com" [90m-> null[0m[0m
+      [31m-[0m[0m force_destroy               = false [90m-> null[0m[0m
+      [31m-[0m[0m hosted_zone_id              = "Z3BJ6K6RIION7M" [90m-> null[0m[0m
+      [31m-[0m[0m id                          = "my-spark-stage-23-3-1998-v1-01" [90m-> null[0m[0m
+      [31m-[0m[0m object_lock_enabled         = false [90m-> null[0m[0m
+      [31m-[0m[0m region                      = "us-west-2" [90m-> null[0m[0m
+      [31m-[0m[0m request_payer               = "BucketOwner" [90m-> null[0m[0m
+      [31m-[0m[0m tags                        = {
+          [31m-[0m[0m "Environment" = "Dev"
+          [31m-[0m[0m "Name"        = "Spark Data Bucket"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all                    = {
+          [31m-[0m[0m "Environment" = "Dev"
+          [31m-[0m[0m "Name"        = "Spark Data Bucket"
+        } [90m-> null[0m[0m
+        [90m# (3 unchanged attributes hidden)[0m[0m
+
+      [31m-[0m[0m grant {
+          [31m-[0m[0m id          = "7b0f27dda9d32c9263a431144f91d286ba45196cfca7019f568db28af087187b" [90m-> null[0m[0m
+          [31m-[0m[0m permissions = [
+              [31m-[0m[0m "FULL_CONTROL",
+            ] [90m-> null[0m[0m
+          [31m-[0m[0m type        = "CanonicalUser" [90m-> null[0m[0m
+            [90m# (1 unchanged attribute hidden)[0m[0m
+        }
+
+      [31m-[0m[0m server_side_encryption_configuration {
+          [31m-[0m[0m rule {
+              [31m-[0m[0m bucket_key_enabled = false [90m-> null[0m[0m
+
+              [31m-[0m[0m apply_server_side_encryption_by_default {
+                  [31m-[0m[0m sse_algorithm     = "AES256" [90m-> null[0m[0m
+                    [90m# (1 unchanged attribute hidden)[0m[0m
+                }
+            }
+        }
+
+      [31m-[0m[0m versioning {
+          [31m-[0m[0m enabled    = false [90m-> null[0m[0m
+          [31m-[0m[0m mfa_delete = false [90m-> null[0m[0m
+        }
+    }
+
+[1m  # aws_security_group.redshift_sg[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_security_group" "redshift_sg" {
+      [31m-[0m[0m arn                    = "arn:aws:ec2:us-west-2:381492085524:security-group/sg-0b49f99874db09765" [90m-> null[0m[0m
+      [31m-[0m[0m description            = "Security group for Redshift" [90m-> null[0m[0m
+      [31m-[0m[0m egress                 = [] [90m-> null[0m[0m
+      [31m-[0m[0m id                     = "sg-0b49f99874db09765" [90m-> null[0m[0m
+      [31m-[0m[0m ingress                = [
+          [31m-[0m[0m {
+              [31m-[0m[0m cidr_blocks      = [
+                  [31m-[0m[0m "0.0.0.0/0",
+                ]
+              [31m-[0m[0m from_port        = 5439
+              [31m-[0m[0m ipv6_cidr_blocks = []
+              [31m-[0m[0m prefix_list_ids  = []
+              [31m-[0m[0m protocol         = "tcp"
+              [31m-[0m[0m security_groups  = []
+              [31m-[0m[0m self             = false
+              [31m-[0m[0m to_port          = 5439
+                [90m# (1 unchanged attribute hidden)[0m[0m
+            },
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m name                   = "redshift-sg" [90m-> null[0m[0m
+      [31m-[0m[0m owner_id               = "381492085524" [90m-> null[0m[0m
+      [31m-[0m[0m revoke_rules_on_delete = false [90m-> null[0m[0m
+      [31m-[0m[0m tags                   = {
+          [31m-[0m[0m "Name" = "Redshift SG"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all               = {
+          [31m-[0m[0m "Name" = "Redshift SG"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m vpc_id                 = "vpc-03675f21362ca33bd" [90m-> null[0m[0m
+        [90m# (1 unchanged attribute hidden)[0m[0m
+    }
+
+[1mPlan:[0m 0 to add, 0 to change, 15 to destroy.
+[0m
+Changes to Outputs:
+  [31m-[0m[0m emr_master_public_dns = "ec2-35-88-44-145.us-west-2.compute.amazonaws.com" [90m-> null[0m[0m
+  [31m-[0m[0m redshift_db           = "demo_db" [90m-> null[0m[0m
+  [31m-[0m[0m redshift_host         = "demo-cluster.cnp6ksjha1o5.us-west-2.redshift.amazonaws.com:5439" [90m-> null[0m[0m
+  [31m-[0m[0m redshift_user         = "admin" [90m-> null[0m[0m
+  [31m-[0m[0m ssh_command_to_emr    = "ssh -i my-key-pair-EMR.pem hadoop@ec2-35-88-44-145.us-west-2.compute.amazonaws.com" [90m-> null[0m[0m
+[0m[1maws_iam_policy_attachment.emr_service_policy: Destroying... [id=emr_service_policy_attachment][0m[0m
+[0m[1maws_iam_role_policy_attachment.redshift_s3_access: Destroying... [id=RedshiftS3AccessRole-20250410104944181900000003][0m[0m
+[0m[1maws_iam_policy_attachment.emr_ec2_policy: Destroying... [id=emr_ec2_policy_attachment][0m[0m
+[0m[1maws_iam_role_policy_attachment.spectrum_glue_access: Destroying... [id=RedshiftSpectrumRole-20250410104943980300000002][0m[0m
+[0m[1maws_iam_role_policy_attachment.spectrum_s3_access: Destroying... [id=RedshiftSpectrumRole-20250410104943944100000001][0m[0m
+[0m[1maws_s3_bucket.data_bucket: Destroying... [id=my-spark-stage-23-3-1998-v1-01][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Destroying... [id=demo-cluster][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Destroying... [id=j-1N9SPUEX088TE][0m[0m
+[0m[1maws_iam_policy_attachment.emr_ec2_policy: Destruction complete after 1s[0m
+[0m[1maws_iam_role_policy_attachment.spectrum_glue_access: Destruction complete after 1s[0m
+[0m[1maws_iam_role_policy_attachment.redshift_s3_access: Destruction complete after 1s[0m
+[0m[1maws_iam_policy_attachment.emr_service_policy: Destruction complete after 1s[0m
+[0m[1maws_iam_role_policy_attachment.spectrum_s3_access: Destruction complete after 1s[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 10s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-1N9SPUEX088TE, 10s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-1N9SPUEX088TE, 20s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 20s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-1N9SPUEX088TE, 30s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 30s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-1N9SPUEX088TE, 40s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 40s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-1N9SPUEX088TE, 50s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 50s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 1m0s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-1N9SPUEX088TE, 1m0s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Destruction complete after 1m6s[0m
+[0m[1maws_iam_instance_profile.emr_profile: Destroying... [id=EMR_EC2_InstanceProfile][0m[0m
+[0m[1maws_iam_role.EMR_DefaultRole: Destroying... [id=EMR_DefaultRole][0m[0m
+[0m[1maws_iam_instance_profile.emr_profile: Destruction complete after 2s[0m
+[0m[1maws_iam_role.EMR_EC2_DefaultRole: Destroying... [id=EMR_EC2_DefaultRole][0m[0m
+[0m[1maws_iam_role.EMR_DefaultRole: Destruction complete after 2s[0m
+[0m[1maws_iam_role.EMR_EC2_DefaultRole: Destruction complete after 1s[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 1m10s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Destruction complete after 1m14s[0m
+[0m[1maws_iam_role.redshift_role: Destroying... [id=RedshiftS3AccessRole][0m[0m
+[0m[1maws_redshift_subnet_group.demo_subnet_group: Destroying... [id=demo-subnet-group][0m[0m
+[0m[1maws_iam_role.redshift_spectrum_role: Destroying... [id=RedshiftSpectrumRole][0m[0m
+[0m[1maws_security_group.redshift_sg: Destroying... [id=sg-0b49f99874db09765][0m[0m
+[0m[1maws_redshift_subnet_group.demo_subnet_group: Destruction complete after 0s[0m
+[0m[1maws_iam_role.redshift_role: Destruction complete after 1s[0m
+[0m[1maws_iam_role.redshift_spectrum_role: Destruction complete after 1s[0m
+[0m[1maws_security_group.redshift_sg: Destruction complete after 2s[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mdeleting S3 Bucket (my-spark-stage-23-3-1998-v1-01): operation error S3: DeleteBucket, https response error StatusCode: 409, RequestID: 7HC5DGA2NF6HJPJM, HostID: BchKFNxOinZeeeP3YxLTRbI/SwmmHhruQmjYgmioXbdgQ3TtgLtxmQykFqdeoSN/MQ7Rl9sgmyk=, api error BucketNotEmpty: The bucket you tried to delete is not empty[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m
+[31m╵[0m[0m
+[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/terraform[01;32manaconda@BVDS-H-Hamdy[00m:[01;34m~/aircrash-data-pipeline/terraform[00m$ terraform destroy
+[?2004l[0m[1maws_iam_role.redshift_spectrum_role: Refreshing state... [id=RedshiftSpectrumRole][0m
+[0m[1maws_iam_role.EMR_EC2_DefaultRole: Refreshing state... [id=EMR_EC2_DefaultRole][0m
+[0m[1maws_iam_role.redshift_role: Refreshing state... [id=RedshiftS3AccessRole][0m
+[0m[1maws_redshift_subnet_group.demo_subnet_group: Refreshing state... [id=demo-subnet-group][0m
+[0m[1maws_iam_role.EMR_DefaultRole: Refreshing state... [id=EMR_DefaultRole][0m
+[0m[1maws_security_group.redshift_sg: Refreshing state... [id=sg-045a80af2af7f1701][0m
+[0m[1maws_s3_bucket.data_bucket: Refreshing state... [id=my-spark-stage-23-3-1998-v1-01][0m
+[0m[1maws_iam_role_policy_attachment.redshift_s3_access: Refreshing state... [id=RedshiftS3AccessRole-20250410105925317700000001][0m
+[0m[1maws_iam_role_policy_attachment.spectrum_glue_access: Refreshing state... [id=RedshiftSpectrumRole-20250410105925493200000002][0m
+[0m[1maws_iam_policy_attachment.emr_ec2_policy: Refreshing state... [id=emr_ec2_policy_attachment][0m
+[0m[1maws_iam_role_policy_attachment.spectrum_s3_access: Refreshing state... [id=RedshiftSpectrumRole-20250410105925517400000003][0m
+[0m[1maws_iam_instance_profile.emr_profile: Refreshing state... [id=EMR_EC2_InstanceProfile][0m
+[0m[1maws_iam_policy_attachment.emr_service_policy: Refreshing state... [id=emr_service_policy_attachment][0m
+[0m[1maws_emr_cluster.spark_cluster: Refreshing state... [id=j-27Q3JW8CLDH2][0m
+[0m[1maws_redshift_cluster.demo_cluster: Refreshing state... [id=demo-cluster][0m
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated
+with the following symbols:
+  [31m-[0m destroy[0m
+
+Terraform will perform the following actions:
+
+[1m  # aws_emr_cluster.spark_cluster[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_emr_cluster" "spark_cluster" {
+      [31m-[0m[0m applications                      = [
+          [31m-[0m[0m "Spark",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m arn                               = "arn:aws:elasticmapreduce:us-west-2:381492085524:cluster/j-27Q3JW8CLDH2" [90m-> null[0m[0m
+      [31m-[0m[0m cluster_state                     = "WAITING" [90m-> null[0m[0m
+      [31m-[0m[0m ebs_root_volume_size              = 0 [90m-> null[0m[0m
+      [31m-[0m[0m id                                = "j-27Q3JW8CLDH2" [90m-> null[0m[0m
+      [31m-[0m[0m keep_job_flow_alive_when_no_steps = true [90m-> null[0m[0m
+      [31m-[0m[0m log_uri                           = "s3n://my-spark-stage-23-3-1998-v1-01/emr-logs/" [90m-> null[0m[0m
+      [31m-[0m[0m master_public_dns                 = "ec2-35-87-52-116.us-west-2.compute.amazonaws.com" [90m-> null[0m[0m
+      [31m-[0m[0m name                              = "MyEMRCluster" [90m-> null[0m[0m
+      [31m-[0m[0m placement_group_config            = [] [90m-> null[0m[0m
+      [31m-[0m[0m release_label                     = "emr-6.10.0" [90m-> null[0m[0m
+      [31m-[0m[0m scale_down_behavior               = "TERMINATE_AT_TASK_COMPLETION" [90m-> null[0m[0m
+      [31m-[0m[0m service_role                      = "arn:aws:iam::381492085524:role/EMR_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m step                              = [] [90m-> null[0m[0m
+      [31m-[0m[0m step_concurrency_level            = 1 [90m-> null[0m[0m
+      [31m-[0m[0m tags                              = {
+          [31m-[0m[0m "Environment"                              = "Dev"
+          [31m-[0m[0m "Name"                                     = "Spark Cluster"
+          [31m-[0m[0m "for-use-with-amazon-emr-managed-policies" = "true"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all                          = {
+          [31m-[0m[0m "Environment"                              = "Dev"
+          [31m-[0m[0m "Name"                                     = "Spark Cluster"
+          [31m-[0m[0m "for-use-with-amazon-emr-managed-policies" = "true"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m termination_protection            = false [90m-> null[0m[0m
+      [31m-[0m[0m unhealthy_node_replacement        = false [90m-> null[0m[0m
+      [31m-[0m[0m visible_to_all_users              = true [90m-> null[0m[0m
+        [90m# (4 unchanged attributes hidden)[0m[0m
+
+      [31m-[0m[0m core_instance_group {
+          [31m-[0m[0m id                 = "ig-2A5OO40YQS4I7" [90m-> null[0m[0m
+          [31m-[0m[0m instance_count     = 2 [90m-> null[0m[0m
+          [31m-[0m[0m instance_type      = "m5.xlarge" [90m-> null[0m[0m
+            name               = [90mnull[0m[0m
+            [90m# (2 unchanged attributes hidden)[0m[0m
+
+          [31m-[0m[0m ebs_config {
+              [31m-[0m[0m iops                 = 0 [90m-> null[0m[0m
+              [31m-[0m[0m size                 = 32 [90m-> null[0m[0m
+              [31m-[0m[0m throughput           = 0 [90m-> null[0m[0m
+              [31m-[0m[0m type                 = "gp2" [90m-> null[0m[0m
+              [31m-[0m[0m volumes_per_instance = 2 [90m-> null[0m[0m
+            }
+        }
+
+      [31m-[0m[0m ec2_attributes {
+          [31m-[0m[0m emr_managed_master_security_group = "sg-015beb0175f56cf5f" [90m-> null[0m[0m
+          [31m-[0m[0m emr_managed_slave_security_group  = "sg-015beb0175f56cf5f" [90m-> null[0m[0m
+          [31m-[0m[0m instance_profile                  = "arn:aws:iam::381492085524:instance-profile/EMR_EC2_InstanceProfile" [90m-> null[0m[0m
+          [31m-[0m[0m key_name                          = "my-key-pair-EMR" [90m-> null[0m[0m
+          [31m-[0m[0m subnet_id                         = "subnet-0b89383302cc9b2c1" [90m-> null[0m[0m
+          [31m-[0m[0m subnet_ids                        = [
+              [31m-[0m[0m "subnet-0b89383302cc9b2c1",
+            ] [90m-> null[0m[0m
+            [90m# (3 unchanged attributes hidden)[0m[0m
+        }
+
+      [31m-[0m[0m master_instance_group {
+          [31m-[0m[0m id             = "ig-WZR5G0IMG3Q0" [90m-> null[0m[0m
+          [31m-[0m[0m instance_count = 1 [90m-> null[0m[0m
+          [31m-[0m[0m instance_type  = "m5.xlarge" [90m-> null[0m[0m
+            name           = [90mnull[0m[0m
+            [90m# (1 unchanged attribute hidden)[0m[0m
+
+          [31m-[0m[0m ebs_config {
+              [31m-[0m[0m iops                 = 0 [90m-> null[0m[0m
+              [31m-[0m[0m size                 = 32 [90m-> null[0m[0m
+              [31m-[0m[0m throughput           = 0 [90m-> null[0m[0m
+              [31m-[0m[0m type                 = "gp2" [90m-> null[0m[0m
+              [31m-[0m[0m volumes_per_instance = 2 [90m-> null[0m[0m
+            }
+        }
+    }
+
+[1m  # aws_iam_instance_profile.emr_profile[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_instance_profile" "emr_profile" {
+      [31m-[0m[0m arn         = "arn:aws:iam::381492085524:instance-profile/EMR_EC2_InstanceProfile" [90m-> null[0m[0m
+      [31m-[0m[0m create_date = "2025-04-10T10:59:25Z" [90m-> null[0m[0m
+      [31m-[0m[0m id          = "EMR_EC2_InstanceProfile" [90m-> null[0m[0m
+      [31m-[0m[0m name        = "EMR_EC2_InstanceProfile" [90m-> null[0m[0m
+      [31m-[0m[0m path        = "/" [90m-> null[0m[0m
+      [31m-[0m[0m role        = "EMR_EC2_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m tags        = {} [90m-> null[0m[0m
+      [31m-[0m[0m tags_all    = {} [90m-> null[0m[0m
+      [31m-[0m[0m unique_id   = "AIPAVRUVTIMKC6TNJFV3F" [90m-> null[0m[0m
+        [90m# (1 unchanged attribute hidden)[0m[0m
+    }
+
+[1m  # aws_iam_policy_attachment.emr_ec2_policy[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_policy_attachment" "emr_ec2_policy" {
+      [31m-[0m[0m groups     = [] [90m-> null[0m[0m
+      [31m-[0m[0m id         = "emr_ec2_policy_attachment" [90m-> null[0m[0m
+      [31m-[0m[0m name       = "emr_ec2_policy_attachment" [90m-> null[0m[0m
+      [31m-[0m[0m policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonElasticMapReduceforEC2Role" [90m-> null[0m[0m
+      [31m-[0m[0m roles      = [
+          [31m-[0m[0m "EMR_EC2_DefaultRole",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m users      = [] [90m-> null[0m[0m
+    }
+
+[1m  # aws_iam_policy_attachment.emr_service_policy[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_policy_attachment" "emr_service_policy" {
+      [31m-[0m[0m groups     = [] [90m-> null[0m[0m
+      [31m-[0m[0m id         = "emr_service_policy_attachment" [90m-> null[0m[0m
+      [31m-[0m[0m name       = "emr_service_policy_attachment" [90m-> null[0m[0m
+      [31m-[0m[0m policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEMRServicePolicy_v2" [90m-> null[0m[0m
+      [31m-[0m[0m roles      = [
+          [31m-[0m[0m "EMR_DefaultRole",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m users      = [] [90m-> null[0m[0m
+    }
+
+[1m  # aws_iam_role.EMR_DefaultRole[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role" "EMR_DefaultRole" {
+      [31m-[0m[0m arn                   = "arn:aws:iam::381492085524:role/EMR_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m assume_role_policy    = jsonencode(
+            {
+              [31m-[0m[0m Statement = [
+                  [31m-[0m[0m {
+                      [31m-[0m[0m Action    = "sts:AssumeRole"
+                      [31m-[0m[0m Effect    = "Allow"
+                      [31m-[0m[0m Principal = {
+                          [31m-[0m[0m Service = "elasticmapreduce.amazonaws.com"
+                        }
+                    },
+                ]
+              [31m-[0m[0m Version   = "2012-10-17"
+            }
+        ) [90m-> null[0m[0m
+      [31m-[0m[0m create_date           = "2025-04-10T10:59:24Z" [90m-> null[0m[0m
+      [31m-[0m[0m force_detach_policies = false [90m-> null[0m[0m
+      [31m-[0m[0m id                    = "EMR_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m managed_policy_arns   = [
+          [31m-[0m[0m "arn:aws:iam::aws:policy/service-role/AmazonEMRServicePolicy_v2",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m max_session_duration  = 3600 [90m-> null[0m[0m
+      [31m-[0m[0m name                  = "EMR_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m path                  = "/" [90m-> null[0m[0m
+      [31m-[0m[0m tags                  = {
+          [31m-[0m[0m "for-use-with-amazon-emr-managed-policies" = "true"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all              = {
+          [31m-[0m[0m "for-use-with-amazon-emr-managed-policies" = "true"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m unique_id             = "AROAVRUVTIMKCNMSWNNUV" [90m-> null[0m[0m
+        [90m# (3 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # aws_iam_role.EMR_EC2_DefaultRole[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role" "EMR_EC2_DefaultRole" {
+      [31m-[0m[0m arn                   = "arn:aws:iam::381492085524:role/EMR_EC2_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m assume_role_policy    = jsonencode(
+            {
+              [31m-[0m[0m Statement = [
+                  [31m-[0m[0m {
+                      [31m-[0m[0m Action    = "sts:AssumeRole"
+                      [31m-[0m[0m Effect    = "Allow"
+                      [31m-[0m[0m Principal = {
+                          [31m-[0m[0m Service = "ec2.amazonaws.com"
+                        }
+                    },
+                ]
+              [31m-[0m[0m Version   = "2012-10-17"
+            }
+        ) [90m-> null[0m[0m
+      [31m-[0m[0m create_date           = "2025-04-10T10:59:24Z" [90m-> null[0m[0m
+      [31m-[0m[0m force_detach_policies = false [90m-> null[0m[0m
+      [31m-[0m[0m id                    = "EMR_EC2_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m managed_policy_arns   = [
+          [31m-[0m[0m "arn:aws:iam::aws:policy/service-role/AmazonElasticMapReduceforEC2Role",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m max_session_duration  = 3600 [90m-> null[0m[0m
+      [31m-[0m[0m name                  = "EMR_EC2_DefaultRole" [90m-> null[0m[0m
+      [31m-[0m[0m path                  = "/" [90m-> null[0m[0m
+      [31m-[0m[0m tags                  = {
+          [31m-[0m[0m "for-use-with-amazon-emr-managed-policies" = "true"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all              = {
+          [31m-[0m[0m "for-use-with-amazon-emr-managed-policies" = "true"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m unique_id             = "AROAVRUVTIMKHKWUC3PUW" [90m-> null[0m[0m
+        [90m# (3 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # aws_iam_role.redshift_role[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role" "redshift_role" {
+      [31m-[0m[0m arn                   = "arn:aws:iam::381492085524:role/RedshiftS3AccessRole" [90m-> null[0m[0m
+      [31m-[0m[0m assume_role_policy    = jsonencode(
+            {
+              [31m-[0m[0m Statement = [
+                  [31m-[0m[0m {
+                      [31m-[0m[0m Action    = "sts:AssumeRole"
+                      [31m-[0m[0m Effect    = "Allow"
+                      [31m-[0m[0m Principal = {
+                          [31m-[0m[0m Service = "redshift.amazonaws.com"
+                        }
+                    },
+                ]
+              [31m-[0m[0m Version   = "2012-10-17"
+            }
+        ) [90m-> null[0m[0m
+      [31m-[0m[0m create_date           = "2025-04-10T10:59:24Z" [90m-> null[0m[0m
+      [31m-[0m[0m force_detach_policies = false [90m-> null[0m[0m
+      [31m-[0m[0m id                    = "RedshiftS3AccessRole" [90m-> null[0m[0m
+      [31m-[0m[0m managed_policy_arns   = [
+          [31m-[0m[0m "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m max_session_duration  = 3600 [90m-> null[0m[0m
+      [31m-[0m[0m name                  = "RedshiftS3AccessRole" [90m-> null[0m[0m
+      [31m-[0m[0m path                  = "/" [90m-> null[0m[0m
+      [31m-[0m[0m tags                  = {} [90m-> null[0m[0m
+      [31m-[0m[0m tags_all              = {} [90m-> null[0m[0m
+      [31m-[0m[0m unique_id             = "AROAVRUVTIMKBLMWFBEIO" [90m-> null[0m[0m
+        [90m# (3 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # aws_iam_role.redshift_spectrum_role[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role" "redshift_spectrum_role" {
+      [31m-[0m[0m arn                   = "arn:aws:iam::381492085524:role/RedshiftSpectrumRole" [90m-> null[0m[0m
+      [31m-[0m[0m assume_role_policy    = jsonencode(
+            {
+              [31m-[0m[0m Statement = [
+                  [31m-[0m[0m {
+                      [31m-[0m[0m Action    = "sts:AssumeRole"
+                      [31m-[0m[0m Effect    = "Allow"
+                      [31m-[0m[0m Principal = {
+                          [31m-[0m[0m Service = "redshift.amazonaws.com"
+                        }
+                    },
+                ]
+              [31m-[0m[0m Version   = "2012-10-17"
+            }
+        ) [90m-> null[0m[0m
+      [31m-[0m[0m create_date           = "2025-04-10T10:59:24Z" [90m-> null[0m[0m
+      [31m-[0m[0m force_detach_policies = false [90m-> null[0m[0m
+      [31m-[0m[0m id                    = "RedshiftSpectrumRole" [90m-> null[0m[0m
+      [31m-[0m[0m managed_policy_arns   = [
+          [31m-[0m[0m "arn:aws:iam::aws:policy/AWSGlueConsoleFullAccess",
+          [31m-[0m[0m "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m max_session_duration  = 3600 [90m-> null[0m[0m
+      [31m-[0m[0m name                  = "RedshiftSpectrumRole" [90m-> null[0m[0m
+      [31m-[0m[0m path                  = "/" [90m-> null[0m[0m
+      [31m-[0m[0m tags                  = {} [90m-> null[0m[0m
+      [31m-[0m[0m tags_all              = {} [90m-> null[0m[0m
+      [31m-[0m[0m unique_id             = "AROAVRUVTIMKEMTAAN4SF" [90m-> null[0m[0m
+        [90m# (3 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # aws_iam_role_policy_attachment.redshift_s3_access[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role_policy_attachment" "redshift_s3_access" {
+      [31m-[0m[0m id         = "RedshiftS3AccessRole-20250410105925317700000001" [90m-> null[0m[0m
+      [31m-[0m[0m policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess" [90m-> null[0m[0m
+      [31m-[0m[0m role       = "RedshiftS3AccessRole" [90m-> null[0m[0m
+    }
+
+[1m  # aws_iam_role_policy_attachment.spectrum_glue_access[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role_policy_attachment" "spectrum_glue_access" {
+      [31m-[0m[0m id         = "RedshiftSpectrumRole-20250410105925493200000002" [90m-> null[0m[0m
+      [31m-[0m[0m policy_arn = "arn:aws:iam::aws:policy/AWSGlueConsoleFullAccess" [90m-> null[0m[0m
+      [31m-[0m[0m role       = "RedshiftSpectrumRole" [90m-> null[0m[0m
+    }
+
+[1m  # aws_iam_role_policy_attachment.spectrum_s3_access[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role_policy_attachment" "spectrum_s3_access" {
+      [31m-[0m[0m id         = "RedshiftSpectrumRole-20250410105925517400000003" [90m-> null[0m[0m
+      [31m-[0m[0m policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess" [90m-> null[0m[0m
+      [31m-[0m[0m role       = "RedshiftSpectrumRole" [90m-> null[0m[0m
+    }
+
+[1m  # aws_redshift_cluster.demo_cluster[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_redshift_cluster" "demo_cluster" {
+      [31m-[0m[0m allow_version_upgrade                = true [90m-> null[0m[0m
+      [31m-[0m[0m apply_immediately                    = false [90m-> null[0m[0m
+      [31m-[0m[0m aqua_configuration_status            = "auto" [90m-> null[0m[0m
+      [31m-[0m[0m arn                                  = "arn:aws:redshift:us-west-2:381492085524:cluster:demo-cluster" [90m-> null[0m[0m
+      [31m-[0m[0m automated_snapshot_retention_period  = 1 [90m-> null[0m[0m
+      [31m-[0m[0m availability_zone                    = "us-west-2d" [90m-> null[0m[0m
+      [31m-[0m[0m availability_zone_relocation_enabled = false [90m-> null[0m[0m
+      [31m-[0m[0m cluster_identifier                   = "demo-cluster" [90m-> null[0m[0m
+      [31m-[0m[0m cluster_namespace_arn                = "arn:aws:redshift:us-west-2:381492085524:namespace:0997226a-870c-4be4-b618-e40583850187" [90m-> null[0m[0m
+      [31m-[0m[0m cluster_nodes                        = [
+          [31m-[0m[0m {
+              [31m-[0m[0m node_role          = "SHARED"
+              [31m-[0m[0m private_ip_address = "172.31.57.44"
+              [31m-[0m[0m public_ip_address  = "35.85.206.217"
+            },
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m cluster_parameter_group_name         = "default.redshift-2.0" [90m-> null[0m[0m
+      [31m-[0m[0m cluster_public_key                   = <<-EOT
+            ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDWcosRroKsx2Lt2lKthM7N81gPiGgY8zghlpHcKlPj7v8Zpd0DWMelQp4FoA/Z2W/iPfn9HyYui3bmSzkiJ4rOW8qtSszVwwy02E1mVMy35zqUuBtaEPOBXWiKL7LczfGCT4LSgImRWYDJEM2F/sa7YllOY/BT/hpznqCqRUqSsTDg43WQByQlNMRode5+XAs2PGzogEzqoO8L33/wueLWpqe73+CEJALFujxjrBsNoOv/F7v2D0bWzhRrLlC7AKIzpRwjmdgTE+8lE2H1QCqy26cMjjCDh19hmfpOYj6r675cySF5Y3GUDSUVhIWUDvf28i9WcOf2f4kSRvx8y63b Amazon-Redshift
+        EOT [90m-> null[0m[0m
+      [31m-[0m[0m cluster_revision_number              = "109768" [90m-> null[0m[0m
+      [31m-[0m[0m cluster_subnet_group_name            = "demo-subnet-group" [90m-> null[0m[0m
+      [31m-[0m[0m cluster_type                         = "single-node" [90m-> null[0m[0m
+      [31m-[0m[0m cluster_version                      = "1.0" [90m-> null[0m[0m
+      [31m-[0m[0m database_name                        = "demo_db" [90m-> null[0m[0m
+      [31m-[0m[0m dns_name                             = "demo-cluster.cnp6ksjha1o5.us-west-2.redshift.amazonaws.com" [90m-> null[0m[0m
+      [31m-[0m[0m encrypted                            = true [90m-> null[0m[0m
+      [31m-[0m[0m endpoint                             = "demo-cluster.cnp6ksjha1o5.us-west-2.redshift.amazonaws.com:5439" [90m-> null[0m[0m
+      [31m-[0m[0m enhanced_vpc_routing                 = false [90m-> null[0m[0m
+      [31m-[0m[0m iam_roles                            = [
+          [31m-[0m[0m "arn:aws:iam::381492085524:role/RedshiftS3AccessRole",
+          [31m-[0m[0m "arn:aws:iam::381492085524:role/RedshiftSpectrumRole",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m id                                   = "demo-cluster" [90m-> null[0m[0m
+      [31m-[0m[0m kms_key_id                           = "AWS_OWNED_KMS_KEY" [90m-> null[0m[0m
+      [31m-[0m[0m maintenance_track_name               = "current" [90m-> null[0m[0m
+      [31m-[0m[0m manual_snapshot_retention_period     = -1 [90m-> null[0m[0m
+      [31m-[0m[0m master_password                      = (sensitive value) [90m-> null[0m[0m
+      [31m-[0m[0m master_password_wo                   = (write-only attribute) [90m-> null[0m[0m
+      [31m-[0m[0m master_username                      = "admin" [90m-> null[0m[0m
+      [31m-[0m[0m multi_az                             = false [90m-> null[0m[0m
+      [31m-[0m[0m node_type                            = "dc2.large" [90m-> null[0m[0m
+      [31m-[0m[0m number_of_nodes                      = 1 [90m-> null[0m[0m
+      [31m-[0m[0m port                                 = 5439 [90m-> null[0m[0m
+      [31m-[0m[0m preferred_maintenance_window         = "mon:08:30-mon:09:00" [90m-> null[0m[0m
+      [31m-[0m[0m publicly_accessible                  = true [90m-> null[0m[0m
+      [31m-[0m[0m skip_final_snapshot                  = true [90m-> null[0m[0m
+      [31m-[0m[0m tags                                 = {
+          [31m-[0m[0m "Environment" = "Dev"
+          [31m-[0m[0m "Name"        = "Demo Cluster"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all                             = {
+          [31m-[0m[0m "Environment" = "Dev"
+          [31m-[0m[0m "Name"        = "Demo Cluster"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m vpc_security_group_ids               = [
+          [31m-[0m[0m "sg-045a80af2af7f1701",
+        ] [90m-> null[0m[0m
+        [90m# (3 unchanged attributes hidden)[0m[0m
+
+      [31m-[0m[0m logging {
+          [31m-[0m[0m enable               = false [90m-> null[0m[0m
+          [31m-[0m[0m log_exports          = [] [90m-> null[0m[0m
+            [90m# (3 unchanged attributes hidden)[0m[0m
+        }
+    }
+
+[1m  # aws_redshift_subnet_group.demo_subnet_group[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_redshift_subnet_group" "demo_subnet_group" {
+      [31m-[0m[0m arn         = "arn:aws:redshift:us-west-2:381492085524:subnetgroup:demo-subnet-group" [90m-> null[0m[0m
+      [31m-[0m[0m description = "Managed by Terraform" [90m-> null[0m[0m
+      [31m-[0m[0m id          = "demo-subnet-group" [90m-> null[0m[0m
+      [31m-[0m[0m name        = "demo-subnet-group" [90m-> null[0m[0m
+      [31m-[0m[0m subnet_ids  = [
+          [31m-[0m[0m "subnet-01e5b7a12aa5dfa94",
+          [31m-[0m[0m "subnet-06eb68aa5e99d735d",
+          [31m-[0m[0m "subnet-0b89383302cc9b2c1",
+          [31m-[0m[0m "subnet-0c7a53c5ec9e6d3bc",
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m tags        = {
+          [31m-[0m[0m "Name" = "Demo Subnet Group"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all    = {
+          [31m-[0m[0m "Name" = "Demo Subnet Group"
+        } [90m-> null[0m[0m
+    }
+
+[1m  # aws_s3_bucket.data_bucket[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_s3_bucket" "data_bucket" {
+      [31m-[0m[0m arn                         = "arn:aws:s3:::my-spark-stage-23-3-1998-v1-01" [90m-> null[0m[0m
+      [31m-[0m[0m bucket                      = "my-spark-stage-23-3-1998-v1-01" [90m-> null[0m[0m
+      [31m-[0m[0m bucket_domain_name          = "my-spark-stage-23-3-1998-v1-01.s3.amazonaws.com" [90m-> null[0m[0m
+      [31m-[0m[0m bucket_regional_domain_name = "my-spark-stage-23-3-1998-v1-01.s3.us-west-2.amazonaws.com" [90m-> null[0m[0m
+      [31m-[0m[0m force_destroy               = false [90m-> null[0m[0m
+      [31m-[0m[0m hosted_zone_id              = "Z3BJ6K6RIION7M" [90m-> null[0m[0m
+      [31m-[0m[0m id                          = "my-spark-stage-23-3-1998-v1-01" [90m-> null[0m[0m
+      [31m-[0m[0m object_lock_enabled         = false [90m-> null[0m[0m
+      [31m-[0m[0m region                      = "us-west-2" [90m-> null[0m[0m
+      [31m-[0m[0m request_payer               = "BucketOwner" [90m-> null[0m[0m
+      [31m-[0m[0m tags                        = {
+          [31m-[0m[0m "Environment" = "Dev"
+          [31m-[0m[0m "Name"        = "Spark Data Bucket"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all                    = {
+          [31m-[0m[0m "Environment" = "Dev"
+          [31m-[0m[0m "Name"        = "Spark Data Bucket"
+        } [90m-> null[0m[0m
+        [90m# (3 unchanged attributes hidden)[0m[0m
+
+      [31m-[0m[0m grant {
+          [31m-[0m[0m id          = "7b0f27dda9d32c9263a431144f91d286ba45196cfca7019f568db28af087187b" [90m-> null[0m[0m
+          [31m-[0m[0m permissions = [
+              [31m-[0m[0m "FULL_CONTROL",
+            ] [90m-> null[0m[0m
+          [31m-[0m[0m type        = "CanonicalUser" [90m-> null[0m[0m
+            [90m# (1 unchanged attribute hidden)[0m[0m
+        }
+
+      [31m-[0m[0m server_side_encryption_configuration {
+          [31m-[0m[0m rule {
+              [31m-[0m[0m bucket_key_enabled = false [90m-> null[0m[0m
+
+              [31m-[0m[0m apply_server_side_encryption_by_default {
+                  [31m-[0m[0m sse_algorithm     = "AES256" [90m-> null[0m[0m
+                    [90m# (1 unchanged attribute hidden)[0m[0m
+                }
+            }
+        }
+
+      [31m-[0m[0m versioning {
+          [31m-[0m[0m enabled    = false [90m-> null[0m[0m
+          [31m-[0m[0m mfa_delete = false [90m-> null[0m[0m
+        }
+    }
+
+[1m  # aws_security_group.redshift_sg[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_security_group" "redshift_sg" {
+      [31m-[0m[0m arn                    = "arn:aws:ec2:us-west-2:381492085524:security-group/sg-045a80af2af7f1701" [90m-> null[0m[0m
+      [31m-[0m[0m description            = "Security group for Redshift" [90m-> null[0m[0m
+      [31m-[0m[0m egress                 = [] [90m-> null[0m[0m
+      [31m-[0m[0m id                     = "sg-045a80af2af7f1701" [90m-> null[0m[0m
+      [31m-[0m[0m ingress                = [
+          [31m-[0m[0m {
+              [31m-[0m[0m cidr_blocks      = [
+                  [31m-[0m[0m "0.0.0.0/0",
+                ]
+              [31m-[0m[0m from_port        = 5439
+              [31m-[0m[0m ipv6_cidr_blocks = []
+              [31m-[0m[0m prefix_list_ids  = []
+              [31m-[0m[0m protocol         = "tcp"
+              [31m-[0m[0m security_groups  = []
+              [31m-[0m[0m self             = false
+              [31m-[0m[0m to_port          = 5439
+                [90m# (1 unchanged attribute hidden)[0m[0m
+            },
+        ] [90m-> null[0m[0m
+      [31m-[0m[0m name                   = "redshift-sg" [90m-> null[0m[0m
+      [31m-[0m[0m owner_id               = "381492085524" [90m-> null[0m[0m
+      [31m-[0m[0m revoke_rules_on_delete = false [90m-> null[0m[0m
+      [31m-[0m[0m tags                   = {
+          [31m-[0m[0m "Name" = "Redshift SG"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all               = {
+          [31m-[0m[0m "Name" = "Redshift SG"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m vpc_id                 = "vpc-03675f21362ca33bd" [90m-> null[0m[0m
+        [90m# (1 unchanged attribute hidden)[0m[0m
+    }
+
+[1mPlan:[0m 0 to add, 0 to change, 15 to destroy.
+[0m
+Changes to Outputs:
+  [31m-[0m[0m emr_master_public_dns = "ec2-35-87-52-116.us-west-2.compute.amazonaws.com" [90m-> null[0m[0m
+  [31m-[0m[0m redshift_db           = "demo_db" [90m-> null[0m[0m
+  [31m-[0m[0m redshift_host         = "demo-cluster.cnp6ksjha1o5.us-west-2.redshift.amazonaws.com:5439" [90m-> null[0m[0m
+  [31m-[0m[0m redshift_user         = "admin" [90m-> null[0m[0m
+  [31m-[0m[0m ssh_command_to_emr    = "ssh -i my-key-pair-EMR.pem hadoop@ec2-35-87-52-116.us-west-2.compute.amazonaws.com" [90m-> null[0m[0m
+[0m[1m
+Do you really want to destroy all resources?[0m
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  [1mEnter a value:[0m [0myes
+
+[0m[1maws_iam_role_policy_attachment.spectrum_glue_access: Destroying... [id=RedshiftSpectrumRole-20250410105925493200000002][0m[0m
+[0m[1maws_iam_role_policy_attachment.spectrum_s3_access: Destroying... [id=RedshiftSpectrumRole-20250410105925517400000003][0m[0m
+[0m[1maws_iam_role_policy_attachment.redshift_s3_access: Destroying... [id=RedshiftS3AccessRole-20250410105925317700000001][0m[0m
+[0m[1maws_iam_policy_attachment.emr_service_policy: Destroying... [id=emr_service_policy_attachment][0m[0m
+[0m[1maws_iam_policy_attachment.emr_ec2_policy: Destroying... [id=emr_ec2_policy_attachment][0m[0m
+[0m[1maws_s3_bucket.data_bucket: Destroying... [id=my-spark-stage-23-3-1998-v1-01][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Destroying... [id=demo-cluster][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Destroying... [id=j-27Q3JW8CLDH2][0m[0m
+[0m[1maws_iam_role_policy_attachment.spectrum_s3_access: Destruction complete after 1s[0m
+[0m[1maws_iam_role_policy_attachment.redshift_s3_access: Destruction complete after 1s[0m
+[0m[1maws_iam_policy_attachment.emr_service_policy: Destruction complete after 1s[0m
+[0m[1maws_iam_policy_attachment.emr_ec2_policy: Destruction complete after 1s[0m
+[0m[1maws_iam_role_policy_attachment.spectrum_glue_access: Destruction complete after 1s[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-27Q3JW8CLDH2, 10s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 10s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 20s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-27Q3JW8CLDH2, 20s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 30s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-27Q3JW8CLDH2, 30s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-27Q3JW8CLDH2, 40s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 40s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 50s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-27Q3JW8CLDH2, 50s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Still destroying... [id=j-27Q3JW8CLDH2, 1m0s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 1m0s elapsed][0m[0m
+[0m[1maws_emr_cluster.spark_cluster: Destruction complete after 1m7s[0m
+[0m[1maws_iam_instance_profile.emr_profile: Destroying... [id=EMR_EC2_InstanceProfile][0m[0m
+[0m[1maws_iam_role.EMR_DefaultRole: Destroying... [id=EMR_DefaultRole][0m[0m
+[0m[1maws_iam_instance_profile.emr_profile: Destruction complete after 1s[0m
+[0m[1maws_iam_role.EMR_EC2_DefaultRole: Destroying... [id=EMR_EC2_DefaultRole][0m[0m
+[0m[1maws_iam_role.EMR_DefaultRole: Destruction complete after 2s[0m
+[0m[1maws_iam_role.EMR_EC2_DefaultRole: Destruction complete after 1s[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 1m10s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Still destroying... [id=demo-cluster, 1m20s elapsed][0m[0m
+[0m[1maws_redshift_cluster.demo_cluster: Destruction complete after 1m27s[0m
+[0m[1maws_redshift_subnet_group.demo_subnet_group: Destroying... [id=demo-subnet-group][0m[0m
+[0m[1maws_iam_role.redshift_role: Destroying... [id=RedshiftS3AccessRole][0m[0m
+[0m[1maws_iam_role.redshift_spectrum_role: Destroying... [id=RedshiftSpectrumRole][0m[0m
+[0m[1maws_security_group.redshift_sg: Destroying... [id=sg-045a80af2af7f1701][0m[0m
+[0m[1maws_redshift_subnet_group.demo_subnet_group: Destruction complete after 0s[0m
+[0m[1maws_iam_role.redshift_role: Destruction complete after 0s[0m
+[0m[1maws_iam_role.redshift_spectrum_role: Destruction complete after 0s[0m
+[0m[1maws_security_group.redshift_sg: Destruction complete after 2s[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mdeleting S3 Bucket (my-spark-stage-23-3-1998-v1-01): operation error S3: DeleteBucket, https response error StatusCode: 409, RequestID: D67DYNPDNH0PDKVT, HostID: d47XPXxvXBoHOrmdIFu5DhSmNBjpW6wf457RklBtvNp+LaDc8rlYhWpA9qsEZ7NykhZKtcreMRI=, api error BucketNotEmpty: The bucket you tried to delete is not empty[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m
+[31m╵[0m[0m
+[?2004h]0;anaconda@BVDS-H-Hamdy: ~/aircrash-data-pipeline/terraform[01;32manaconda@
